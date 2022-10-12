@@ -36,6 +36,8 @@ plt.show()
 
 ### Redoing the [Reactable 2019 Women's World Cup Predictions Visualization](https://glin.github.io/reactable/articles/womens-world-cup/womens-world-cup.html)
 
+You can find the [notebook here](https://github.com/znstrider/mpltable/blob/master/example/wwc_example.ipynb)
+
 <img src="example/images/wwc_table.png">
 
 ### Styling A Table
