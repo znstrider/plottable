@@ -1,0 +1,41 @@
+from numbers import Number
+
+
+def decimal_to_percent(val: float) -> str:
+    """Formats Numbers to a string, replacing
+        0 with "–"
+        1 with "✓"
+        values < 0.01 with "<1%" and
+        values > 0.99 with ">99%"
+
+    Args:
+        val (float): numeric value to format
+
+    Returns:
+        str: formatted numeric value as string
+    """
+    if val == 0:
+        return "–"
+    elif val == 1:
+        return "✓"  # "\u2713"
+    elif val < 0.01:
+        return "<1%"
+    elif val > 0.99:
+        return ">99%"
+    else:
+        return f"{str(round(val * 100))}%"
+
+
+def tickcross(val: Number | bool) -> str:
+    """formats a bool or (0, 1) value to a tick "✔" or cross "✖"
+
+    Args:
+        val (Number | bool): bool or (0, 1) value to format
+
+    Returns:
+        str: formatted value as string
+    """
+    if val:
+        return "✔"
+    else:
+        return "✖"
