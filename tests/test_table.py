@@ -15,6 +15,12 @@ def test_table_df_index_name(table):
     assert table.df.index.name == "index"
 
 
+def test_index_col(df):
+    tab = Table(df, index_col="A")
+    assert tab.index_col == "A"
+    assert tab.df.shape[1] == 4
+
+
 def test_table_axes(table):
     assert table.ax == plt.gca()
 

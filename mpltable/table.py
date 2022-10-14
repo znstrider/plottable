@@ -297,7 +297,7 @@ class Table:
     def _init_rows(self):
         """Initializes the Tables Rows."""
         self.rows = {}
-        for idx, values in enumerate(self.df[-1::-1].to_records()):
+        for idx, values in enumerate(self.df.iloc[-1::-1].to_records()):
             self.rows[idx] = self._get_row(idx, values)
 
         self.col_label_row = self._get_col_label_row(idx + 1, self._get_column_titles())
