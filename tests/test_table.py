@@ -21,6 +21,11 @@ def test_index_col(df):
     assert tab.df.shape[1] == 4
 
 
+def test_columns(df):
+    tab = Table(df, columns=["A", "B"])
+    assert tab.df.columns.to_list() == ["A", "B"]
+
+
 def test_table_axes(table):
     assert table.ax == plt.gca()
 
