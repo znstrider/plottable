@@ -26,6 +26,22 @@ def test_columns(df):
     assert tab.df.columns.to_list() == ["A", "B"]
 
 
+def test_cell_kw(df):
+    tab = Table(df, cell_kw={"linewidth": 2})
+    assert "linewidth" in tab.cell_kw
+    assert tab.cell_kw["linewidth"] == 2
+
+    for cell in tab.cells.values():
+        assert cell.rectangle_patch.get_linewidth() == 2
+
+
+def test_col_label_row(table):
+    for col_idx, cell in enumerate(table.col_label_row.cells):
+        assert cell.xy == (col_idx, cell.row_idx)
+        assert cell.row_idx == 10
+        assert cell.col_idx == col_idx
+
+
 def test_table_axes(table):
     assert table.ax == plt.gca()
 
