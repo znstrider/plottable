@@ -356,7 +356,7 @@ class Table:
 
         x = 0
 
-        row_cells = []
+        row = Row(cells=[], index=idx)
 
         for col_idx, (colname, width, _content) in enumerate(
             zip(self.column_names, widths, content)
@@ -376,13 +376,11 @@ class Table:
                 ax=self.ax,
             )
 
-            row_cells.append(cell)
+            row.append(cell)
             self.cells[(idx, col_idx)] = cell
             cell.draw()
 
             x += width
-
-        row = Row(row_cells, idx)
 
         return row
 
@@ -416,7 +414,7 @@ class Table:
 
         x = 0
 
-        row_cells = []
+        row = Row(cells=[], index=idx)
 
         for col_idx, (colname, width, _content) in enumerate(
             zip(self.column_names, widths, content)
@@ -455,14 +453,12 @@ class Table:
                     ax=self.ax,
                 )
 
-            row_cells.append(cell)
+            row.append(cell)
             self.columns[colname].append(cell)
             self.cells[(idx, col_idx)] = cell
             cell.draw()
 
             x += width
-
-        row = Row(row_cells, idx)
 
         return row
 
