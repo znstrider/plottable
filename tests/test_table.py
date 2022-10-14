@@ -146,11 +146,11 @@ def test_get_column_textprops_replace_default_kw(table):
     assert textprops == {"ha": "center", "multialignment": "center"}
 
 
-def test_table_textprops_is_default(table):
+def test_textprops_is_default(table):
     assert table.textprops == {"ha": "right"}
 
 
-def test_table_textprops(df):
+def test_textprops(df):
     tab = Table(df, textprops={"fontsize": 14})
     assert tab.textprops == {"ha": "right", "fontsize": 14}
 
