@@ -377,7 +377,6 @@ class Table:
             )
 
             row.append(cell)
-            self.cells[(idx, col_idx)] = cell
             cell.draw()
 
             x += width
