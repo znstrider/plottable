@@ -1,6 +1,6 @@
 import matplotlib
 from mpltable import __version__
-from mpltable.cell import SubplotCell, TextCell, create_cell
+from mpltable.cell import Column, SubplotCell, TextCell, create_cell
 from mpltable.column_def import ColumnType
 from mpltable.plots import percentile_bars
 
@@ -164,3 +164,25 @@ def test_create_cell_type_is_subplotcell():
         )
         == SubplotCell
     )
+
+
+def test_row_of_subplot_cells_does_not_raise_on_set_fontproperties():
+    cells = [
+        create_cell(
+            column_type=ColumnType.SUBPLOT,
+            xy=(0, i),
+            content=i,
+            row_idx=i,
+            col_idx=0,
+            plot_fn=percentile_bars,
+        )
+        for i in range(5)
+    ]
+
+    row = Column(cells, index=0)
+
+    row.set_fontcolor("k")
+    row.set_fontfamily("Arial")
+    row.set_fontsize(10)
+    row.set_ha("right")
+    row.set_ma("right")

@@ -339,27 +339,32 @@ class Sequence:  # Row and Column can inherit from this
 
     def set_fontcolor(self, *args) -> Sequence:
         for cell in self.cells:
-            cell.text.set_color(*args)
+            if hasattr(cell, "text"):
+                cell.text.set_color(*args)
         return self
 
     def set_fontfamily(self, *args) -> Sequence:
         for cell in self.cells:
-            cell.text.set_fontfamily(*args)
+            if hasattr(cell, "text"):
+                cell.text.set_fontfamily(*args)
         return self
 
     def set_fontsize(self, *args) -> Sequence:
         for cell in self.cells:
-            cell.text.set_fontsize(*args)
+            if hasattr(cell, "text"):
+                cell.text.set_fontsize(*args)
         return self
 
     def set_ha(self, *args) -> Sequence:
         for cell in self.cells:
-            cell.text.set_ha(*args)
+            if hasattr(cell, "text"):
+                cell.text.set_ha(*args)
         return self
 
     def set_ma(self, *args) -> Sequence:
         for cell in self.cells:
-            cell.text.set_ma(*args)
+            if hasattr(cell, "text"):
+                cell.text.set_ma(*args)
         return self
 
 
