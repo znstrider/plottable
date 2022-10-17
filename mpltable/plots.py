@@ -1,5 +1,5 @@
 from statistics import mean
-from typing import Any, Dict, Tuple
+from typing import Any, Callable, Dict, Tuple
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -48,6 +48,7 @@ def bar(
     plot_bg_bar: bool = False,
     annotate: bool = False,
     text_kwargs: Dict[str, Any] = {},
+    formatter: Callable = None,
     **kwargs,
 ):
 
@@ -79,6 +80,9 @@ def bar(
         else:
             ha = "right"
             x = val - 0.025 * abs(xlim[1] - xlim[0])
+
+        if formatter is not None:
+            val = formatter(val)
 
         ax.text(x, 0.5, val, ha=ha, va="center", **text_kwargs, zorder=0.3)
 
@@ -203,10 +207,14 @@ def percentile_stars(
 def progress_donut(
     ax: matplotlib.axes.Axes,
     val: float,
+    radius: float = 0.45,
     color: str = None,
+    background_color: str = None,
     width: float = 0.05,
     is_pct: bool = False,
     textprops: Dict[str, Any] = {},
+    formatter: Callable = None,
+    **kwargs,
 ):
 
     if color is None:
@@ -215,8 +223,26 @@ def progress_donut(
     if is_pct is False:
         val = val / 100
 
-    wedge = Wedge((0.5, 0.5), 0.45, 90, 90 + val * 360, width=width, color=color)
+    if background_color is not None:
+        bg_wedge = Wedge(
+            (0.5, 0.5),
+            radius,
+            90,
+            360 + 90,
+            width=width,
+            color=background_color,
+            **kwargs,
+        )
+        ax.add_patch(bg_wedge)
+
+    wedge = Wedge(
+        (0.5, 0.5), radius, 90, 90 + val * 360, width=width, color=color, **kwargs
+    )
     ax.add_patch(wedge)
     ax.set_aspect("equal")
+
+    if formatter is not None:
+        val = formatter(val)
+
     ax.text(0.5, 0.5, val, ha="center", va="center", **textprops)
     ax.axis("off")
