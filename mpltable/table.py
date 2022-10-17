@@ -466,7 +466,7 @@ class Table:
             formatter = _dict.get("formatter")
             if formatter is not None:
                 for cell in self.columns[colname].cells:
-                    if hasattr(TextCell, "text"):
+                    if hasattr(cell, "text"):
                         cell.text.set_text(formatter(cell.content))
 
     def _apply_column_cmaps(self) -> None:
@@ -475,9 +475,7 @@ class Table:
             if cmap_fn is not None:
                 for cell in self.columns[colname].cells:
                     if isinstance(cell.content, Number):
-                        if ("bbox" in _dict.get("textprops")) & hasattr(
-                            TextCell, "text"
-                        ):
+                        if ("bbox" in _dict.get("textprops")) & hasattr(cell, "text"):
                             cell.text.set_bbox(
                                 {
                                     "color": cmap_fn(cell.content),
@@ -492,7 +490,7 @@ class Table:
             cmap_fn = _dict.get("text_cmap")
             if cmap_fn is not None:
                 for cell in self.columns[colname].cells:
-                    if isinstance(cell.content, Number) & hasattr(TextCell, "text"):
+                    if isinstance(cell.content, Number) & hasattr(cell, "text"):
                         cell.text.set_color(cmap_fn(cell.content))
 
     def autoset_fontcolors(
