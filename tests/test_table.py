@@ -381,3 +381,12 @@ def test_plot_fn_with_formatter_does_not_raise(df):
     ]
 
     tab = Table(df, column_definitions=column_definitions)
+
+
+def test_cell_text_is_formatted_by_formatter(df):
+
+    col_defs = [ColDef("A", formatter=formatters.decimal_to_percent)]
+    tab = Table(df, column_definitions=col_defs)
+
+    for cell in tab.columns["A"].cells:
+        assert len(cell.text.get_text()) <= 4
