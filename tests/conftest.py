@@ -45,9 +45,7 @@ def subplot_cell() -> SubplotCell:
 
 @pytest.fixture
 def df() -> pd.DataFrame:
-    return pd.DataFrame(
-        np.random.random((10, 5)), columns=["A", "B", "C", "D", "E"]
-    ).round(2)
+    return pd.DataFrame(np.random.random((10, 5)), columns=["A", "B", "C", "D", "E"])
 
 
 @pytest.fixture
