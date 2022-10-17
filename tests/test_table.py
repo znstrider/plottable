@@ -2,7 +2,7 @@ from tkinter.tix import CELL
 
 import matplotlib.pyplot as plt
 import pytest
-from mpltable import ColumnDefinition, Table
+from mpltable import ColDef, ColumnDefinition, Table, formatters, plots
 from mpltable.cell import SubplotCell
 
 
@@ -371,3 +371,13 @@ def test_plot_row_dividers(table):
 
 def test_plot_column_borders(table):
     pass
+
+
+def test_plot_fn_with_formatter(df):
+    column_definitions = [
+        ColDef(
+            "A", plot_fn=plots.progress_donut, formatter=formatters.decimal_to_percent
+        )
+    ]
+
+    tab = Table(df, column_definitions=column_definitions)
