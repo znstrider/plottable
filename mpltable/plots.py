@@ -24,15 +24,25 @@ def monochrome_image(ax: matplotlib.axes.Axes, path: str):
     return im
 
 
-def circled_image(ax: matplotlib.axes.Axes, path: str):
+def circled_image(ax: matplotlib.axes.Axes, path: str, **circle_kwargs):
+    circle_kw = {
+        "visible": False,
+        "facecolor": "None",
+        "linewidth": 1,
+        "clip_on": False,
+    }
+
+    circle_kw.update(circle_kwargs)
+
     img = plt.imread(path)
     im = ax.imshow(img)
     ax.axis("off")
 
     radius = min(max(ax.get_xlim()), max(ax.get_ylim())) / 2
     center = (mean(ax.get_xlim()), mean(ax.get_ylim()))
-    circle = Circle(center, radius, transform=ax.transData)
-    im.set_clip_on(True)
+    circle = Circle(center, radius, transform=ax.transData, **circle_kw)
+    ax.add_patch(circle)
+
     im.set_clip_path(circle)
 
     ax.set_aspect("equal")
