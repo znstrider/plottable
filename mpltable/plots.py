@@ -1,5 +1,5 @@
 from statistics import mean
-from typing import Any, Callable, Dict, Tuple
+from typing import Any, Callable, Dict, List, Tuple
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -8,7 +8,16 @@ from matplotlib.patches import BoxStyle, Circle, FancyBboxPatch, Rectangle, Wedg
 from PIL import Image
 
 
-def image(ax: matplotlib.axes.Axes, path: str):
+def image(ax: matplotlib.axes.Axes, path: str) -> matplotlib.image.AxesImage:
+    """Plots an image on the axes.
+
+    Args:
+        ax (matplotlib.axes.Axes): Axes
+        path (str): path to image file
+
+    Returns:
+       matplotlib.image.AxesImage
+    """
     img = plt.imread(path)
     im = ax.imshow(img)
     im.set_clip_on(False)
@@ -16,7 +25,16 @@ def image(ax: matplotlib.axes.Axes, path: str):
     return im
 
 
-def monochrome_image(ax: matplotlib.axes.Axes, path: str):
+def monochrome_image(ax: matplotlib.axes.Axes, path: str) -> matplotlib.image.AxesImage:
+    """Plots a monochrome image on the axes.
+
+    Args:
+        ax (matplotlib.axes.Axes): Axes
+        path (str): path to image file
+
+    Returns:
+       matplotlib.image.AxesImage
+    """
     img = Image.open(path).convert("LA")
     im = ax.imshow(img)
     im.set_clip_on(False)
@@ -24,7 +42,19 @@ def monochrome_image(ax: matplotlib.axes.Axes, path: str):
     return im
 
 
-def circled_image(ax: matplotlib.axes.Axes, path: str, **circle_kwargs):
+def circled_image(
+    ax: matplotlib.axes.Axes, path: str, **circle_kwargs
+) -> matplotlib.image.AxesImage:
+    """Plots an image cropped to a circle on the axes.
+    The cropping radius is the minimum of (width, height) of the image.
+
+    Args:
+        ax (matplotlib.axes.Axes): Axes
+        path (str): path to image file
+
+    Returns:
+        matplotlib.image.AxesImage
+    """
     circle_kw = {
         "visible": False,
         "facecolor": "None",
@@ -57,10 +87,33 @@ def bar(
     cmap: matplotlib.colors.Colormap = None,
     plot_bg_bar: bool = False,
     annotate: bool = False,
-    text_kwargs: Dict[str, Any] = {},
+    textprops: Dict[str, Any] = {},
     formatter: Callable = None,
     **kwargs,
-):
+) -> matplotlib.container.BarContainer:
+    """Plots a bar on the axes.
+
+    Args:
+        ax (matplotlib.axes.Axes):
+            Axes
+        val (float):
+            value
+        xlim (Tuple[float, float], optional):
+            data limit for the x-axis. Defaults to (0, 1).
+        cmap (matplotlib.colors.Colormap, optional):
+            colormap. Defaults to None.
+        plot_bg_bar (bool, optional):
+            whether to plot a background bar. Defaults to False.
+        annotate (bool, optional):
+            whether to annotate the value. Defaults to False.
+        textprops (Dict[str, Any], optional):
+            textprops passed to ax.text. Defaults to {}.
+        formatter (Callable, optional):
+            a function that formats the annotation string. Defaults to None.
+
+    Returns:
+        matplotlib.container.BarContainer
+    """
 
     if "color" in kwargs:
         color = kwargs.pop("color")
@@ -94,7 +147,7 @@ def bar(
         if formatter is not None:
             val = formatter(val)
 
-        ax.text(x, 0.5, val, ha=ha, va="center", **text_kwargs, zorder=0.3)
+        ax.text(x, 0.5, val, ha=ha, va="center", **textprops, zorder=0.3)
 
     ax.axis("off")
     ax.set_xlim(
@@ -110,11 +163,31 @@ def percentile_bars(
     ax: matplotlib.axes.Axes,
     val: float,
     color: str = None,
-    faded_color: str = None,
+    background_color: str = None,
     cmap: matplotlib.colors.Colormap = None,
     is_pct=False,
     rect_kw: Dict[str, Any] = {},
-):
+) -> List[matplotlib.patches.FancyBboxPatch]:
+    """Plots percentile bars on the axes.
+
+    Args:
+        ax (matplotlib.axes.Axes): Axes
+        val (float): value
+        color (str, optional):
+            color of the bars. Defaults to None.
+        background_color (str, optional):
+            background_color of the bars if value is not reached. Defaults to None.
+        cmap (matplotlib.colors.Colormap, optional):
+            Colormap. Defaults to None.
+        is_pct (bool, optional):
+            whether the value is given not as a decimal, but as a value between 0 and 100.
+            Defaults to False.
+        rect_kw (Dict[str, Any], optional):
+            rect keywords passed to matplotlib.patches.FancyBboxPatch. Defaults to {}.
+
+    Returns:
+        List[matplotlib.patches.FancyBboxPatch]
+    """
 
     _rect_kw = {
         "linewidth": 2.5,
@@ -125,8 +198,8 @@ def percentile_bars(
 
     edgecolor = ax.get_facecolor()
 
-    if faded_color is None:
-        faded_color = ax.get_facecolor()
+    if background_color is None:
+        background_color = ax.get_facecolor()
 
     if is_pct is False:
         val = val / 100
@@ -149,7 +222,7 @@ def percentile_bars(
             xy=(x, 0),
             width=0.1,
             height=1,
-            facecolor=faded_color,
+            facecolor=background_color,
             edgecolor=edgecolor,
             alpha=1,
             **_rect_kw,
@@ -181,13 +254,33 @@ def percentile_stars(
     val: float,
     n_stars: int = 5,
     color: str = "orange",
-    faded_color: str = None,
+    background_color: str = None,
     is_pct: bool = False,
     padding: float = 0.1,
     **kwargs,
-):
-    if faded_color is None:
-        faded_color = ax.get_facecolor()
+) -> matplotlib.collections.PathCollection:
+    """_summary_
+
+    Args:
+        ax (matplotlib.axes.Axes): Axes
+        val (float): value
+        n_stars (int, optional):
+            number of maximum stars. Defaults to 5.
+        color (str, optional):
+            color of the stars. Defaults to "orange".
+        background_color (str, optional):
+            background_color of the stars if value is not reached. Defaults to None.
+        is_pct (bool, optional):
+            whether the value is given not as a decimal, but as a value between 0 and 100.
+            Defaults to False.
+        padding (float, optional):
+            horizontal and vertical padding from stars to axes border. Defaults to 0.1.
+
+    Returns:
+        matplotlib.collections.PathCollection
+    """
+    if background_color is None:
+        background_color = ax.get_facecolor()
 
     if is_pct is False:
         val = val / 100
@@ -203,7 +296,9 @@ def percentile_stars(
     if "s" not in kwargs:
         kwargs["s"] = 200
 
-    ax.scatter(x=xs, y=ys, color=faded_color, marker="*", zorder=0.2, alpha=1, **kwargs)
+    ax.scatter(
+        x=xs, y=ys, color=background_color, marker="*", zorder=0.2, alpha=1, **kwargs
+    )
     sc = ax.scatter(x=xs, y=ys, color=color, marker="*", zorder=0.2, **kwargs)
     sc.set_clip_path(value_patch)
 
@@ -225,7 +320,32 @@ def progress_donut(
     textprops: Dict[str, Any] = {},
     formatter: Callable = None,
     **kwargs,
-):
+) -> List[matplotlib.patches.Wedge]:
+    """_summary_
+
+    Args:
+        ax (matplotlib.axes.Axes): Axes
+        val (float): value
+        radius (float, optional):
+            radius of the progress donut. Defaults to 0.45.
+        color (str, optional):
+            color of the progress donut. Defaults to None.
+        background_color (str, optional):
+            background_color of the progress donut where the value is not reached. Defaults to None.
+        width (float, optional):
+            width of the donut wedge. Defaults to 0.05.
+        is_pct (bool, optional):
+            whether the value is given not as a decimal, but as a value between 0 and 100.
+            Defaults to False.
+        textprops (Dict[str, Any], optional):
+            textprops passed to ax.text. Defaults to {}.
+        formatter (Callable, optional):
+            a function that formats the annotation string. Defaults to None.
+
+    Returns:
+        List[matplotlib.patches.Wedge]
+    """
+    wedges = []
 
     if color is None:
         color = "C1"
@@ -245,9 +365,13 @@ def progress_donut(
         )
         ax.add_patch(bg_wedge)
 
+        wedges.append(bg_wedge)
+
     wedge = Wedge(
         (0.5, 0.5), radius, 90, 90 + val * 360, width=width, color=color, **kwargs
     )
+    wedges.append(wedge)
+
     ax.add_patch(wedge)
     ax.set_aspect("equal")
 
@@ -256,3 +380,5 @@ def progress_donut(
 
     ax.text(0.5, 0.5, val, ha="center", va="center", **textprops)
     ax.axis("off")
+
+    return wedges
