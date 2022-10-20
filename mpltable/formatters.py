@@ -39,3 +39,18 @@ def tickcross(val: Number | bool) -> str:
         return "✔"
     else:
         return "✖"
+
+
+def signed_integer(val: int) -> str:
+    """formats an integer to a string that includes the sign, ie. 1 to "+1".
+
+    Args:
+        val (int): integer value to format
+
+    Returns:
+        str: formatted value as string
+    """
+    if val <= 0:
+        return str(val)
+    else:
+        return f"+{val}"

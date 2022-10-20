@@ -1,5 +1,5 @@
 import pytest
-from mpltable.formatters import decimal_to_percent, tickcross
+from mpltable.formatters import decimal_to_percent, signed_integer, tickcross
 
 
 class TestDecimalToPercent:
@@ -27,3 +27,9 @@ class TestDecimalToPercent:
 )
 def test_tickcross(input, out):
     assert tickcross(input) == out
+
+
+def test_signed_integer():
+    assert signed_integer(0) == "0"
+    assert signed_integer(1) == "+1"
+    assert signed_integer(-1) == "-1"
