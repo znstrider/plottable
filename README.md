@@ -102,21 +102,21 @@ class ColumnDefinition:
         title: str = None:
             the plotted column name
         width: float = 1:
-            the width of the column
+            the width of the column as a factor of the default width
         textprops: Dict[str, Any] = field(default_factory=dict)
-            textprops provided to each TextCell updating the Table's textprops.
+            textprops provided to each textcell
         formatter: Callable = None:
             A Callable to format the appearance of the texts
         cmap: Callable = None:
-            A Callable that returns a color in hex-code based on the cells value.
+            A Callable that returns a color based on the cells value.
         text_cmap: Callable = None:
-            A Callable that returns a color in hex-code based on the cells value.
+            A Callable that returns a color based on the cells value.
         group: str = None:
             Each group will get a spanner column label above the column labels.
         plot_fn: Callable = None
             A Callable that will take the cells value as input and create a subplot
             on top of each cell and plot onto them.
-            mpltable.plots provides a few basic functions to use.
+            To pass additional arguments to it, use plot_kw (see below).
         plot_kw: Dict[str, Any] = field(default_factory=dict)
             Additional keywords provided to plot_fn.
         border: str | List = None:

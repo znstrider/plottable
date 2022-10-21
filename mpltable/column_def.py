@@ -39,7 +39,7 @@ class ColumnDefinition:
         title: str = None:
             the plotted column name
         width: float = 1:
-            the width of the column
+            the width of the column as a factor of the default width
         textprops: Dict[str, Any] = field(default_factory=dict)
             textprops provided to each textcell
         formatter: Callable = None:
@@ -53,6 +53,7 @@ class ColumnDefinition:
         plot_fn: Callable = None
             A Callable that will take the cells value as input and create a subplot
             on top of each cell and plot onto them.
+            To pass additional arguments to it, use plot_kw (see below).
         plot_kw: Dict[str, Any] = field(default_factory=dict)
             Additional keywords provided to plot_fn.
         border: str | List = None:
