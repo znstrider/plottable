@@ -285,7 +285,7 @@ class Sequence:  # Row and Column can inherit from this
     """A Sequence of Table Cells."""
 
     def __init__(self, cells: List[TableCell], index: int):
-        """_summary_
+        """
 
         Args:
             cells (List[TableCell]): List of TableCells.
@@ -295,73 +295,143 @@ class Sequence:  # Row and Column can inherit from this
         self.index = index
 
     def append(self, cell: TableCell):
+        """Appends another TableCell to its `cells` propery.
+
+        Args:
+            cell (TableCell): A TableCell object
+        """
         self.cells.append(cell)
 
     def set_alpha(self, *args) -> Sequence:
+        """Sets the alpha for all cells of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             cell.rectangle_patch.set_alpha(*args)
         return self
 
     def set_color(self, *args) -> Sequence:
+        """Sets the color for all cells of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             cell.rectangle_patch.set_color(*args)
         return self
 
     def set_facecolor(self, *args) -> Sequence:
+        """Sets the facecolor for all cells of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             cell.rectangle_patch.set_facecolor(*args)
         return self
 
     def set_edgecolor(self, *args) -> Sequence:
+        """Sets the edgecolor for all cells of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             cell.rectangle_patch.set_edgecolor(*args)
         return self
 
     def set_fill(self, *args) -> Sequence:
+        """Sets the fill for all cells of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             cell.rectangle_patch.set_fill(*args)
         return self
 
     def set_hatch(self, *args) -> Sequence:
+        """Sets the hatch for all cells of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             cell.rectangle_patch.set_hatch(*args)
         return self
 
     def set_linestyle(self, *args) -> Sequence:
+        """Sets the linestyle for all cells of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             cell.rectangle_patch.set_linestyle(*args)
         return self
 
     def set_linewidth(self, *args) -> Sequence:
+        """Sets the linewidth for all cells of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             cell.rectangle_patch.set_linewidth(*args)
         return self
 
     def set_fontcolor(self, *args) -> Sequence:
+        """Sets the fontcolor for all cells texts of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             if hasattr(cell, "text"):
                 cell.text.set_color(*args)
         return self
 
     def set_fontfamily(self, *args) -> Sequence:
+        """Sets the fontfamily for all cells texts of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             if hasattr(cell, "text"):
                 cell.text.set_fontfamily(*args)
         return self
 
     def set_fontsize(self, *args) -> Sequence:
+        """Sets the fontsize for all cells texts of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             if hasattr(cell, "text"):
                 cell.text.set_fontsize(*args)
         return self
 
     def set_ha(self, *args) -> Sequence:
+        """Sets the horizontal alignment for all cells texts of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             if hasattr(cell, "text"):
                 cell.text.set_ha(*args)
         return self
 
     def set_ma(self, *args) -> Sequence:
+        """Sets the multialignment for all cells tests of the Sequence and returns self.
+
+        Return:
+            self[Sequence]: A Sequence of Cells
+        """
         for cell in self.cells:
             if hasattr(cell, "text"):
                 cell.text.set_ma(*args)
@@ -375,11 +445,21 @@ class Row(Sequence):
         super().__init__(cells=cells, index=index)
 
     def get_xrange(self) -> Tuple[float, float]:
+        """Gets the xrange of the Row.
+
+        Returns:
+            Tuple[float, float]: Tuple of min and max x.
+        """
         return min([cell.xy[0] for cell in self.cells]), max(
             [cell.xy[0] + cell.width for cell in self.cells]
         )
 
     def get_yrange(self) -> Tuple[float, float]:
+        """Gets the yrange of the Row.
+
+        Returns:
+            Tuple[float, float]: Tuple of min and max y.
+        """
         cell = self.cells[0]
         return cell.xy[1], cell.xy[1] + cell.height
 
@@ -395,10 +475,20 @@ class Column(Sequence):
         self.name = name
 
     def get_xrange(self) -> Tuple[float, float]:
+        """Gets the xrange of the Column.
+
+        Returns:
+            Tuple[float, float]: Tuple of min and max x.
+        """
         cell = self.cells[0]
         return cell.xy[0], cell.xy[0] + cell.width
 
     def get_yrange(self) -> Tuple[float, float]:
+        """Gets the yrange of the Column.
+
+        Returns:
+            Tuple[float, float]: Tuple of min and max y.
+        """
         return min([cell.xy[1] for cell in self.cells]), max(
             [cell.xy[1] + cell.height for cell in self.cells]
         )
