@@ -274,9 +274,9 @@ class Table:
         kwargs = replace_lw_key(kwargs)
         COLUMN_BORDER_KW.update(kwargs)
 
-        for k, _def in self.column_definitions.items():
+        for name, _def in self.column_definitions.items():
             if "border" in _def:
-                col = self.columns[k]
+                col = self.columns[name]
 
                 y0, y1 = col.get_yrange()
 
