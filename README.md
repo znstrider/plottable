@@ -141,7 +141,7 @@ tab = Table(d, column_definitions=[ColumnDefinition(name="A", title="Title A", w
 plt.show()
 ```
 
-#### Plotting onto TabelCells:
+#### Plotting onto TableCells:
 
 By providing a plot_fn to a ColumnDefinition, you can have mpltable create an overlay axes that is plotted onto for each of the Columns cells.
 The cells value is passed to the plot function.
