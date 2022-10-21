@@ -42,10 +42,10 @@ You can find the [notebook here](https://github.com/znstrider/mpltable/blob/mast
 
 ### Styling A Table
 
-##### The are two main ways to customize a table:
+#### The are three ways to customize a table:
 
 
-The first is by supplying keywords to the Table:
+##### 1) By supplying keywords to the Table:
 
 ```python
 """
@@ -90,7 +90,7 @@ Args:
 ```
 
 
-The second is to provide a ColumnDefinition for each column you want to style:
+##### 2) Providing a ColumnDefinition for each column you want to style:
 
 ```python
 class ColumnDefinition:
@@ -123,10 +123,17 @@ class ColumnDefinition:
             Plots a vertical borderline.
             can be either "left" / "l", "right" / "r" or "both"
     """
+
+
 ```
 
 and providing them to the Table:
-```
+```python
+from mpltable import ColumnDefinition
+
+# You can also use the shorthand ColDef
+from mpltable import ColDef
+
 d = pd.DataFrame(np.random.random((10, 5)), columns=["A", "B", "C", "D", "E"]).round(2)
 fig, ax = plt.subplots(figsize=(6, 10))
 tab = Table(d, column_definitions=[ColumnDefinition(name="A", title="Title A", width=2)])
@@ -134,15 +141,105 @@ tab = Table(d, column_definitions=[ColumnDefinition(name="A", title="Title A", w
 plt.show()
 ```
 
+#### Plotting onto TabelCells:
 
-Lastly there are further Table functions that you can use after instantiating the Table:
+By providing a plot_fn to a ColumnDefinition, you can have mpltable create an overlay axes that is plotted onto for each of the Columns cells.
+The cells value is passed to the plot function.
+
+```python
+tab = Table(d, column_definitions=[ColumnDefinition(name="A", plot_fn=plot_fn)])
+```
+
+Commonly used example plots are provided in mpltable.plots. You can have a look at them in the [notebook here](https://github.com/znstrider/mpltable/blob/master/example/plots.ipynb).
+
+You can also easily create your own functions. Just make sure to have ax as first and val (the cells value) as second arguments.
+
+```python
+def custom_plot_fn(
+    ax: matplotlib.axes.Axes,
+    val: Any,
+    # further arguments that can be passed via plot_kw
+    ):
+    ...
+```
+
+for more complex data you can create a dictionary or function that gets gata based on the cells value, ie.
+
+```python
+def custom_plot_fn(
+    ax: matplotlib.axes.Axes,
+    val: Any,
+    # further arguments that can be passed via plot_kw
+    ):
+    
+    data = my_data_dict.get(val)
+    or
+    data = my_data_getter_function(val)
+```
+
+You can create Sparklines, Histograms, ... you name it. 
+
+
+#### Text Formatters
+
+You can provide a function that takes a cells value as input and outputs a string to be displayed on the table.  
+Some basic formatters are provided in mpltable.formatters. It is very easy to create your own formatter functions.
+
+```python
+tab = Table(d, column_definitions=[ColumnDefinition(name="A", formatter=formatter)])
+```
+
+
+##### 3) Accessing a tables rows or columns:
+
+Columns are accessed by the column name:
+```python
+table.columns[column_name]
+```
+
+Rows are accessed by their index:
+```python
+table.rows[idx]
+```
+
+After creating a table, you can set cell (rectangle patch) properties and textproperties by accessing functions of the Sequence, ie:
+
+```python
+table.columns[column_name].set_facecolor("#f0f0f0")
+```
+
+Available functions are:
+```
+    # rectangle patch setters
+    set_alpha
+    set_color
+    set_edgecolor
+    set_facecolor
+    set_fill
+    set_hatch
+    set_linestyle
+    set_linewidth
+
+    # fontproperty setters
+    set_fontcolor
+    set_fontfamily
+    set_fontsize
+    set_ha
+    set_ma
+```
+
+
+##### Lastly there are further Table functions that you can use after instantiating the Table:
 ```python
 
-set_alternating_row_color(self, color: str) -> Table:
+set_alternating_row_colors(
+    self, color: str | Tuple[float] = None, color2: str | Tuple[float] = None
+) -> Table:
     """Sets the color of even row's rectangle patches to `color`.
 
     Args:
-        color (str): color recognized by matplotlib
+        color (str): color recognized by matplotlib for the even rows 0 ...
+        color2 (str): color recognized by matplotlib for the odd rows 1 ...
 
     Returns:
         Table: mpltable.table.Table
@@ -150,7 +247,7 @@ set_alternating_row_color(self, color: str) -> Table:
 
 
 autoset_fontcolors(self, fn: Callable = None, **kwargs) -> Table:
-    """Sets the fontcolor of each table cell based on the facecolor of its rectangle patch.
+    """Sets the fontcolor of each table cells text based on the facecolor of its rectangle patch.
 
     Args:
         fn (Callable, optional):
@@ -165,7 +262,6 @@ autoset_fontcolors(self, fn: Callable = None, **kwargs) -> Table:
 
 ```
 
-
 ### Contributing
 
 ##### *Contributors are very welcome to this project.*  
@@ -179,8 +275,7 @@ At this stage, **usability** and **clarity** are a main priority.
 
 - If you'd like to review the code and have suggestions on how to structure the project better, I'm all ears!
 
-
-You are also very welcome to contribute to the package:
+##### You are also very welcome to contribute to the package by creating a Pull Request.
 
 If you are relatively new to contributing to projects or need a refresher on the process, you can read this great [Step-by-step guide to contribute on GitHub](https://www.dataschool.io/how-to-contribute-on-github/) 
 
