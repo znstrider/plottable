@@ -259,7 +259,7 @@ def percentile_stars(
     padding: float = 0.1,
     **kwargs,
 ) -> matplotlib.collections.PathCollection:
-    """_summary_
+    """Plots x out of 5 percentile stars on the axes.
 
     Args:
         ax (matplotlib.axes.Axes): Axes
@@ -321,7 +321,7 @@ def progress_donut(
     formatter: Callable = None,
     **kwargs,
 ) -> List[matplotlib.patches.Wedge]:
-    """_summary_
+    """Plots a Progress Donut on the axes.
 
     Args:
         ax (matplotlib.axes.Axes): Axes

@@ -1,3 +1,5 @@
+"""Module containing Table Class to plot matplotlib tables."""
+
 from __future__ import annotations
 
 from numbers import Number
@@ -10,11 +12,66 @@ import pandas as pd
 from .cell import Column, Row, SubplotCell, TextCell, create_cell
 from .column_def import ColumnDefinition, ColumnType
 from .font import contrasting_font_color
-from .helpers import replace_lw_key
+from .helpers import _replace_lw_key
 
 
 class Table:
-    """A Table class for matplotlib tables."""
+    """Class to plot a beautiful matplotlib table.
+
+    Args:
+        df (pd.DataFrame):
+            A pandas DataFrame with your table data
+        ax (mpl.axes.Axes, optional):
+            matplotlib axes. Defaults to None.
+        index_col (str, optional):
+            column to set as the DataFrame index. Defaults to None.
+        columns (List[str], optional):
+            columns to use. If None defaults to all columns.
+        column_definitions (List[mpltable.column_def.ColumnDefinition], optional):
+            ColumnDefinitions for columns that should be styled. Defaults to None.
+        textprops (Dict[str, Any], optional):
+            textprops are passed to each TextCells matplotlib.pyplot.text. Defaults to {}.
+        cell_kw (Dict[str, Any], optional):
+            cell_kw are passed to to each cells matplotlib.patches.Rectangle patch.
+            Defaults to {}.
+        col_label_cell_kw (Dict[str, Any], optional):
+            col_label_cell_kw are passed to to each ColumnLabels cells
+            matplotlib.patches.Rectangle patch. Defaults to {}.
+        col_label_divider (bool, optional):
+            Whether to plot a divider line below the column labels. Defaults to True.
+        col_label_divider_kw (Dict[str, Any], optional):
+            col_label_divider_kw are passed to plt.plot. Defaults to {}.
+        footer_divider (bool, optional):
+            Whether to plot a divider line below the table. Defaults to False.
+        footer_divider_kw (Dict[str, Any], optional):
+            footer_divider_kw are passed to plt.plot. Defaults to {}.
+        row_dividers (bool, optional):
+            Whether to plot divider lines between rows. Defaults to True.
+        row_divider_kw (Dict[str, Any], optional):
+            row_divider_kw are passed to plt.plot. Defaults to {}.
+        column_border_kw (Dict[str, Any], optional):
+            column_border_kw are passed to plt.plot. Defaults to {}.
+        even_row_color (str | Tuple, optional):
+            facecolor of the even row cell's patches
+        odd_row_color (str | Tuple, optional):
+            facecolor of the even row cell's patches
+
+    Examples
+    --------
+
+    >>> import matplotlib.pyplot as plt
+    >>> import numpy as np
+    >>> import pandas as pd
+    >>>
+    >>> from mpltable import Table
+    >>>
+    >>> d = pd.DataFrame(np.random.random((10, 5)), columns=["A", "B", "C", "D", "E"]).round(2)
+    >>> fig, ax = plt.subplots(figsize=(5, 8))
+    >>> tab = Table(d)
+    >>>
+    >>> plt.show()
+
+    """
 
     def __init__(
         self,
@@ -36,46 +93,7 @@ class Table:
         even_row_color: str | Tuple = None,
         odd_row_color: str | Tuple = None,
     ):
-        """Class to plot a beautiful matplotlib table.
 
-        Args:
-            df (pd.DataFrame):
-                A pandas DataFrame with your table data
-            ax (mpl.axes.Axes, optional):
-                matplotlib axes. Defaults to None.
-            index_col (str, optional):
-                column to set as the DataFrame index. Defaults to None.
-            columns (List[str], optional):
-                columns to use. If None defaults to all columns.
-            column_definitions (List[mpltable.column_def.ColumnDefinition], optional):
-                ColumnDefinitions for columns that should be styled. Defaults to None.
-            textprops (Dict[str, Any], optional):
-                textprops are passed to each TextCells matplotlib.pyplot.text. Defaults to {}.
-            cell_kw (Dict[str, Any], optional):
-                cell_kw are passed to to each cells matplotlib.patches.Rectangle patch.
-                Defaults to {}.
-            col_label_cell_kw (Dict[str, Any], optional):
-                col_label_cell_kw are passed to to each ColumnLabels cells
-                matplotlib.patches.Rectangle patch. Defaults to {}.
-            col_label_divider (bool, optional):
-                Whether to plot a divider line below the column labels. Defaults to True.
-            footer_divider (bool, optional):
-                Whether to plot a divider line below the table. Defaults to False.
-            row_dividers (bool, optional):
-                Whether to plot divider lines between rows. Defaults to True.
-            row_divider_kw (Dict[str, Any], optional):
-                row_divider_kw are passed to plt.plot. Defaults to {}.
-            col_label_divider_kw (Dict[str, Any], optional):
-                col_label_divider_kw are passed to plt.plot. Defaults to {}.
-            footer_divider_kw (Dict[str, Any], optional):
-                footer_divider_kw are passed to plt.plot. Defaults to {}.
-            column_border_kw (Dict[str, Any], optional):
-                column_border_kw are passed to plt.plot. Defaults to {}.
-            even_row_color (str | Tuple, optional):
-                facecolor of the even row cell's patches
-            odd_row_color (str | Tuple, optional):
-                facecolor of the even row cell's patches
-        """
         if index_col is not None:
             if index_col in df.columns:
                 df = df.set_index(index_col)
@@ -148,7 +166,7 @@ class Table:
         """
         if column_definitions is not None:
             self.column_definitions = {
-                _def.name: _def.as_non_none_dict() for _def in column_definitions
+                _def.name: _def._as_non_none_dict() for _def in column_definitions
             }
         else:
             self.column_definitions = {}
@@ -156,7 +174,7 @@ class Table:
             if col not in self.column_definitions:
                 self.column_definitions[col] = ColumnDefinition(
                     name=col
-                ).as_non_none_dict()
+                )._as_non_none_dict()
 
     def _get_column_titles(self) -> List[str]:
         """Returns a List of Column Titles.
@@ -259,7 +277,7 @@ class Table:
             "color": plt.rcParams["text.color"],
             "linewidth": 0.2,
         }
-        kwargs = replace_lw_key(kwargs)
+        kwargs = _replace_lw_key(kwargs)
         ROW_DIVIDER_KW.update(kwargs)
 
         for idx, row in list(self.rows.items())[1:]:
@@ -271,7 +289,7 @@ class Table:
         """Plots lines between all TableColumns where "border" is defined."""
         COLUMN_BORDER_KW = {"linewidth": 1, "color": plt.rcParams["text.color"]}
 
-        kwargs = replace_lw_key(kwargs)
+        kwargs = _replace_lw_key(kwargs)
         COLUMN_BORDER_KW.update(kwargs)
 
         for name, _def in self.column_definitions.items():

@@ -111,6 +111,9 @@ target/
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
 
+# MyST Notebook Parser
+jupyter_execute/
+
 # exclude data from source control by default
 *.hdf
 *.clf

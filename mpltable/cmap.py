@@ -1,8 +1,7 @@
 from typing import Callable
 
-import pandas as pd
-
 import matplotlib
+import pandas as pd
 from matplotlib.colors import TwoSlopeNorm
 
 

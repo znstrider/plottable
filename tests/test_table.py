@@ -1,5 +1,3 @@
-from tkinter.tix import CELL
-
 import matplotlib.pyplot as plt
 import pytest
 from mpltable import ColDef, ColumnDefinition, Table, formatters, plots
@@ -66,7 +64,7 @@ def test_table_column_definitions(table):
     for col in table.column_names:
         assert (
             table.column_definitions[col]
-            == ColumnDefinition(name=col).as_non_none_dict()
+            == ColumnDefinition(name=col)._as_non_none_dict()
         )
 
 
@@ -138,7 +136,7 @@ def test_table_cell_kw(df):
 
 
 def test_get_column_textprops_default(table):
-    col_def_dict = ColumnDefinition("A").as_non_none_dict()
+    col_def_dict = ColumnDefinition("A")._as_non_none_dict()
     textprops = table._get_column_textprops(col_def_dict)
     assert textprops == {"ha": "right", "multialignment": "right"}
 
@@ -146,7 +144,7 @@ def test_get_column_textprops_default(table):
 def test_get_column_textprops_added_kw(table):
     col_def_dict = ColumnDefinition(
         "A", textprops={"size": 16, "weight": "bold"}
-    ).as_non_none_dict()
+    )._as_non_none_dict()
     textprops = table._get_column_textprops(col_def_dict)
     assert textprops == {
         "ha": "right",
@@ -157,7 +155,7 @@ def test_get_column_textprops_added_kw(table):
 
 
 def test_get_column_textprops_replace_default_kw(table):
-    col_def_dict = ColumnDefinition("A", textprops={"ha": "center"}).as_non_none_dict()
+    col_def_dict = ColumnDefinition("A", textprops={"ha": "center"})._as_non_none_dict()
     textprops = table._get_column_textprops(col_def_dict)
     assert textprops == {"ha": "center", "multialignment": "center"}
 

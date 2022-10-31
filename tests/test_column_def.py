@@ -1,5 +1,5 @@
 import pytest
-from mpltable.column_def import ColumnDefinition, filter_none_values
+from mpltable.column_def import ColumnDefinition, _filter_none_values
 
 
 @pytest.fixture
@@ -9,11 +9,11 @@ def col_def() -> ColumnDefinition:
 
 def test_filter_none_values():
     d = {"a": 1, "b": {}, "c": None}
-    assert filter_none_values(d) == {"a": 1, "b": {}}
+    assert _filter_none_values(d) == {"a": 1, "b": {}}
 
 
 def test_column_definition_as_dict(col_def):
-    assert col_def.asdict() == {
+    assert col_def._asdict() == {
         "name": "col",
         "title": "Column",
         "width": 1,
@@ -29,7 +29,7 @@ def test_column_definition_as_dict(col_def):
 
 
 def test_column_definition_as_non_none_dict(col_def):
-    assert col_def.as_non_none_dict() == {
+    assert col_def._as_non_none_dict() == {
         "name": "col",
         "title": "Column",
         "width": 1,
