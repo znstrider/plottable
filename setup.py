@@ -20,7 +20,7 @@ CLASSIFIERS = [
 
 setuptools.setup(
     name="mpltable",
-    version="0.0.1",
+    version="0.1.0",
     author="znstrider",
     author_email="mindfulstrider@gmail.com",
     author_twitter="@danzn1",
