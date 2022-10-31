@@ -6,7 +6,7 @@ from plottable.plots import percentile_bars
 
 
 def test_version():
-    assert __version__ == "0.1.0"
+    assert __version__ == "0.1.1"
 
 
 class TestDefaultCell:

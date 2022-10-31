@@ -20,7 +20,7 @@ CLASSIFIERS = [
 
 setuptools.setup(
     name="plottable",
-    version="0.1.0",
+    version="0.1.1",
     author="znstrider",
     author_email="mindfulstrider@gmail.com",
     author_twitter="@danzn1",
