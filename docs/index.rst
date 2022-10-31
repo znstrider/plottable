@@ -63,13 +63,13 @@ Women's World Cup Example
    :maxdepth: 2
    :caption: Documentation:
 
-   notebooks/table
-   notebooks/column_definition
-   notebooks/plots
-   notebooks/cmap
-   notebooks/formatters
-   notebooks/font
-   notebooks/rows_and_columns
+   notebooks/table.ipynb
+   notebooks/column_definition.ipynb
+   notebooks/plots.ipynb
+   notebooks/cmap.ipynb
+   notebooks/formatters.ipynb
+   notebooks/font.ipynb
+   notebooks/rows_and_columns.ipynb
 
 
 .. toctree::
