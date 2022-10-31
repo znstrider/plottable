@@ -27,7 +27,7 @@ def decimal_to_percent(val: float) -> str:
 
 
 def tickcross(val: Number | bool) -> str:
-    """formats a bool or (0, 1) value to a tick "✔" or cross "✖"
+    """formats a bool or (0, 1) value to a tick "✔" or cross "✖".
 
     Args:
         val (Number | bool): bool or (0, 1) value to format
