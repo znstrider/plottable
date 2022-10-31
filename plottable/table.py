@@ -27,7 +27,7 @@ class Table:
             column to set as the DataFrame index. Defaults to None.
         columns (List[str], optional):
             columns to use. If None defaults to all columns.
-        column_definitions (List[mpltable.column_def.ColumnDefinition], optional):
+        column_definitions (List[plottable.column_def.ColumnDefinition], optional):
             ColumnDefinitions for columns that should be styled. Defaults to None.
         textprops (Dict[str, Any], optional):
             textprops are passed to each TextCells matplotlib.pyplot.text. Defaults to {}.
@@ -63,7 +63,7 @@ class Table:
     >>> import numpy as np
     >>> import pandas as pd
     >>>
-    >>> from mpltable import Table
+    >>> from plottable import Table
     >>>
     >>> d = pd.DataFrame(np.random.random((10, 5)), columns=["A", "B", "C", "D", "E"]).round(2)
     >>> fig, ax = plt.subplots(figsize=(5, 8))
@@ -342,7 +342,7 @@ class Table:
             color2 (str): color recognized by matplotlib for the odd rows 1 ...
 
         Returns:
-            Table: mpltable.table.Table
+            Table: plottable.table.Table
         """
         if color is not None:
             for row in self.get_even_rows():
@@ -520,13 +520,13 @@ class Table:
             fn (Callable, optional):
                 Callable that takes the rectangle patches facecolor as
                 rgba-value as argument.
-                Defaults to mpltable.font.contrasting_font_color if fn is None.
+                Defaults to plottable.font.contrasting_font_color if fn is None.
             colnames (List[str], optional):
                 columns to apply the function to
             kwargs are passed to fn.
 
         Returns:
-            mpltable.table.Table
+            plottable.table.Table
         """
 
         if fn is None:

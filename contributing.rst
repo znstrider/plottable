@@ -9,7 +9,7 @@ You can contribute by giving feedback:
 At this stage, **usability** and **clarity** are a main priority.
 - If there is something that you think doesn't make sense, is too hard to do, worded badly or should work differently etc., don't hesitate to open an issue or get in touch.
 
-- If there is something you would like mpltable to do, but it currently lacks the functionality, open an issue.
+- If there is something you would like plottable to do, but it currently lacks the functionality, open an issue.
 
 - If you'd like to review the code and have suggestions on how to structure the project better, I'm all ears!
 
@@ -21,8 +21,8 @@ If you want to contribute to the project, best use an editable installation:
 
 .. code-block::
 
-    git clone https://github.com/znstrider/mpltable.git
-    cd mpltable
+    git clone https://github.com/znstrider/plottable.git
+    cd plottable
 
     pip install -e .
 

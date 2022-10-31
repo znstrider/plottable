@@ -1,6 +1,6 @@
 import matplotlib
 import pandas as pd
-from mpltable.cmap import normed_cmap
+from plottable.cmap import normed_cmap
 
 
 def test_normed_cmap():

@@ -1,8 +1,8 @@
 import matplotlib
-from mpltable import __version__
-from mpltable.cell import Column, SubplotCell, TextCell, create_cell
-from mpltable.column_def import ColumnType
-from mpltable.plots import percentile_bars
+from plottable import __version__
+from plottable.cell import Column, SubplotCell, TextCell, create_cell
+from plottable.column_def import ColumnType
+from plottable.plots import percentile_bars
 
 
 def test_version():

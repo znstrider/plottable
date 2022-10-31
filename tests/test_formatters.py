@@ -1,5 +1,5 @@
 import pytest
-from mpltable.formatters import decimal_to_percent, signed_integer, tickcross
+from plottable.formatters import decimal_to_percent, signed_integer, tickcross
 
 
 class TestDecimalToPercent:

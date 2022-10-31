@@ -14,10 +14,10 @@ def create_cell(column_type: ColumnType, *args, **kwargs) -> TableCell:
     """Factory Function to create a specific TableCell depending on `column_type`.
 
     Args:
-        column_type (ColumnType): mpltable.column_def.ColumnType
+        column_type (ColumnType): plottable.column_def.ColumnType
 
     Returns:
-        TableCell: mpltable.cell.TableCell
+        TableCell: plottable.cell.TableCell
     """
     if column_type is ColumnType.SUBPLOT:
         return SubplotCell(*args, **kwargs)
@@ -52,7 +52,7 @@ class Cell:
 
 
 class TableCell(Cell):
-    """A TableCell class for a mpltable.table.Table."""
+    """A TableCell class for a plottable.table.Table."""
 
     def __init__(
         self,
@@ -110,7 +110,7 @@ class TableCell(Cell):
 
 
 class SubplotCell(TableCell):
-    """A SubplotTableCell class for a mpltable.table.Table that creates a subplot on top of
+    """A SubplotTableCell class for a plottable.table.Table that creates a subplot on top of
     it's rectangle patch.
     """
 
@@ -194,7 +194,7 @@ class SubplotCell(TableCell):
 
 
 class TextCell(TableCell):
-    """A TextCell class for a mpltable.table.Table that creates a text inside it's rectangle patch."""
+    """A TextCell class for a plottable.table.Table that creates a text inside it's rectangle patch."""
 
     def __init__(
         self,

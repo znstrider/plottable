@@ -1,9 +1,9 @@
 import numpy as np
 import pandas as pd
 import pytest
-from mpltable.cell import Cell, SubplotCell, TableCell, TextCell
-from mpltable.plots import percentile_bars
-from mpltable.table import Table
+from plottable.cell import Cell, SubplotCell, TableCell, TextCell
+from plottable.plots import percentile_bars
+from plottable.table import Table
 
 
 @pytest.fixture

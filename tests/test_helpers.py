@@ -1,4 +1,4 @@
-from mpltable.helpers import _replace_lw_key
+from plottable.helpers import _replace_lw_key
 
 
 def test_replace_lw_key():

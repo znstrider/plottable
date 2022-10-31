@@ -1,69 +1,69 @@
-mpltable package
+plottable package
 ================
 
 Submodules
 ----------
 
-mpltable.cell module
+plottable.cell module
 ---------------------
 
-.. automodule:: mpltable.cell
+.. automodule:: plottable.cell
    :members:
    :undoc-members:
    :show-inheritance:
 
-mpltable.cmap module
+plottable.cmap module
 --------------------
 
-.. automodule:: mpltable.cmap
+.. automodule:: plottable.cmap
    :members:
    :undoc-members:
    :show-inheritance:
 
-mpltable.column_def module
+plottable.column_def module
 ---------------------------
 
-.. automodule:: mpltable.column_def
+.. automodule:: plottable.column_def
    :members:
    :undoc-members:
    :show-inheritance:
 
-mpltable.font module
+plottable.font module
 --------------------
 
-.. automodule:: mpltable.font
+.. automodule:: plottable.font
    :members:
    :undoc-members:
    :show-inheritance:
 
-mpltable.formatters module
+plottable.formatters module
 --------------------------
 
-.. automodule:: mpltable.formatters
+.. automodule:: plottable.formatters
    :members:
    :undoc-members:
    :show-inheritance:
 
-mpltable.helpers module
+plottable.helpers module
 -----------------------
 
-.. automodule:: mpltable.helpers
+.. automodule:: plottable.helpers
    :members:
    :undoc-members:
    :show-inheritance:
 
-mpltable.plots module
+plottable.plots module
 ---------------------
 
-.. automodule:: mpltable.plots
+.. automodule:: plottable.plots
    :members:
    :undoc-members:
    :show-inheritance:
 
-mpltable.table module
+plottable.table module
 ---------------------
 
-.. automodule:: mpltable.table
+.. automodule:: plottable.table
    :members:
    :undoc-members:
    :show-inheritance:
@@ -71,7 +71,7 @@ mpltable.table module
 Module contents
 ---------------
 
-.. automodule:: mpltable
+.. automodule:: plottable
    :members:
    :undoc-members:
    :show-inheritance:

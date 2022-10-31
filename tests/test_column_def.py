@@ -1,5 +1,5 @@
 import pytest
-from mpltable.column_def import ColumnDefinition, _filter_none_values
+from plottable.column_def import ColumnDefinition, _filter_none_values
 
 
 @pytest.fixture

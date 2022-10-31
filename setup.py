@@ -19,7 +19,7 @@ CLASSIFIERS = [
 ]
 
 setuptools.setup(
-    name="mpltable",
+    name="plottable",
     version="0.1.0",
     author="znstrider",
     author_email="mindfulstrider@gmail.com",
@@ -28,7 +28,7 @@ setuptools.setup(
     license="MIT",
     long_description=readme,
     long_description_content_type="text/markdown",
-    url="https://github.com/znstrider/mpltable",
+    url="https://github.com/znstrider/plottable",
     packages=setuptools.find_packages(),
     package_data={
         # If any package contains *.txt or *.rst files, include them:

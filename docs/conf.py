@@ -6,12 +6,12 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath("../mpltable"))
+sys.path.insert(0, os.path.abspath("../plottable"))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "mpltable"
+project = "plottable"
 copyright = "2022, znstrider"
 author = "znstrider"
 release = "0.1.0"
@@ -42,11 +42,11 @@ html_static_path = ["_static"]
 html_theme = "sphinx_book_theme"
 html_theme_options = {
     "home_page_in_toc": True,
-    "github_url": "https://github.com/znstrider/mpltable",
-    "repository_url": "https://github.com/znstrider/mpltable",
+    "github_url": "https://github.com/znstrider/plottable",
+    "repository_url": "https://github.com/znstrider/plottable",
     "repository_branch": "master",
     "path_to_docs": "docs",
     "use_repository_button": True,
     "use_edit_page_button": True,
 }
-html_title = "mpltable"
+html_title = "plottable"

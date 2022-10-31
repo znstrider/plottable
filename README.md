@@ -2,7 +2,7 @@
 ## Beautiful tables in matplotlib.
 
 
-This is an early version of mpltable. To learn the functionality best take a look at the notebooks in the example folder.
+This is an early version of plottable. To learn the functionality best take a look at the notebooks in the example folder.
 
 ### Quickstart
 
@@ -11,8 +11,8 @@ This is an early version of mpltable. To learn the functionality best take a loo
 As it's a very early version, it's not yet available on PyPi. To install clone the repository and install it with pip locally:
 
 ```
-git clone https://github.com/znstrider/mpltable.git
-cd mpltable
+git clone https://github.com/znstrider/plottable.git
+cd plottable
 
 pip install .
 ```
@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from mpltable import Table
+from plottable import Table
 
 d = pd.DataFrame(np.random.random((5, 5)), columns=["A", "B", "C", "D", "E"]).round(2)
 fig, ax = plt.subplots(figsize=(6, 5))
@@ -36,7 +36,7 @@ plt.show()
 
 ### Redoing the [Reactable 2019 Women's World Cup Predictions Visualization](https://glin.github.io/reactable/articles/womens-world-cup/womens-world-cup.html)
 
-You can find the [notebook here](https://github.com/znstrider/mpltable/blob/master/docs/example_notebooks/wwc_example.ipynb)
+You can find the [notebook here](https://github.com/znstrider/plottable/blob/master/docs/example_notebooks/wwc_example.ipynb)
 
 <img src="docs/example_notebooks/images/wwc_table.png">
 
@@ -58,7 +58,7 @@ You can find the [notebook here](https://github.com/znstrider/mpltable/blob/mast
             column to set as the DataFrame index. Defaults to None.
         columns (List[str], optional):
             columns to use. If None defaults to all columns.
-        column_definitions (List[mpltable.column_def.ColumnDefinition], optional):
+        column_definitions (List[plottable.column_def.ColumnDefinition], optional):
             ColumnDefinitions for columns that should be styled. Defaults to None.
         textprops (Dict[str, Any], optional):
             textprops are passed to each TextCells matplotlib.pyplot.text. Defaults to {}.
@@ -129,10 +129,10 @@ class ColumnDefinition:
 
 and providing them to the Table:
 ```python
-from mpltable import ColumnDefinition
+from plottable import ColumnDefinition
 
 # You can also use the alias ColDef
-from mpltable import ColDef
+from plottable import ColDef
 
 d = pd.DataFrame(np.random.random((10, 5)), columns=["A", "B", "C", "D", "E"]).round(2)
 fig, ax = plt.subplots(figsize=(6, 10))
@@ -143,14 +143,14 @@ plt.show()
 
 #### Plotting onto TableCells:
 
-By providing a plot_fn to a ColumnDefinition, you can have mpltable create an overlay axes that is plotted onto for each of the Columns cells.
+By providing a plot_fn to a ColumnDefinition, you can have plottable create an overlay axes that is plotted onto for each of the Columns cells.
 The cells value is passed to the plot function.
 
 ```python
 tab = Table(d, column_definitions=[ColumnDefinition(name="A", plot_fn=plot_fn)])
 ```
 
-Commonly used example plots are provided in mpltable.plots. You can have a look at them in the [notebook here](https://github.com/znstrider/mpltable/blob/master/docs/notebooks/plots.ipynb).
+Commonly used example plots are provided in plottable.plots. You can have a look at them in the [notebook here](https://github.com/znstrider/plottable/blob/master/docs/notebooks/plots.ipynb).
 
 You can also easily create your own functions. Just make sure to have ax as first and val (the cells value) as second arguments.
 
@@ -183,7 +183,7 @@ You can create Sparklines, Histograms, ... you name it.
 #### Text Formatters
 
 You can provide a function that takes a cells value as input and outputs a string to be displayed on the table.  
-Some basic formatters are provided in mpltable.formatters. It is very easy to create your own formatter functions.
+Some basic formatters are provided in plottable.formatters. It is very easy to create your own formatter functions.
 
 ```python
 tab = Table(d, column_definitions=[ColumnDefinition(name="A", formatter=formatter)])
@@ -242,7 +242,7 @@ set_alternating_row_colors(
         color2 (str): color recognized by matplotlib for the odd rows 1 ...
 
     Returns:
-        Table: mpltable.table.Table
+        Table: plottable.table.Table
     """
 
 
@@ -255,11 +255,11 @@ autoset_fontcolors(
         fn (Callable, optional):
             Callable that takes the rectangle patches facecolor as
             rgba-value as argument.
-            Defaults to mpltable.font.contrasting_font_color if fn is None.
+            Defaults to plottable.font.contrasting_font_color if fn is None.
         kwargs are passed to fn.
 
     Returns:
-        mpltable.table.Table
+        plottable.table.Table
     """
 
 ```
@@ -273,5 +273,5 @@ Please take a look at the [Contributor Guide](contributing.rst)
 
 ### Credits
 
-mpltable is built for the lack of good table packages in the python ecosystem.
+plottable is built for the lack of good table packages in the python ecosystem.
 It draws inspiration from R packages [gt](https://github.com/rstudio/gt) and [reactable](https://github.com/glin/reactable), from blog posts about creating tables in matplotlib [Tim Bayer: How to create custom tables](https://matplotlib.org/matplotblog/posts/how-to-create-custom-tables/) and [Son of a corner: Beautiful Tables in Matplotlib, a Tutorial](https://www.sonofacorner.com/beautiful-tables/) and from matplotlibs own table module.

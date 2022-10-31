@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import pytest
-from mpltable import ColDef, ColumnDefinition, Table, formatters, plots
-from mpltable.cell import SubplotCell
+from plottable import ColDef, ColumnDefinition, Table, formatters, plots
+from plottable.cell import SubplotCell
 
 
 def test_table_df(df):

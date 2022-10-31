@@ -1,7 +1,7 @@
-mpltable
+plottable
 ========
 
 .. toctree::
    :maxdepth: 4
 
-   mpltable
+   plottable
