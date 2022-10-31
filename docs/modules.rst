@@ -1,5 +1,5 @@
 plottable
-========
+=========
 
 .. toctree::
    :maxdepth: 4

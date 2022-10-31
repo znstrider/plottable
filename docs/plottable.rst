@@ -1,5 +1,5 @@
 plottable package
-================
+=================
 
 Submodules
 ----------
@@ -13,7 +13,7 @@ plottable.cell module
    :show-inheritance:
 
 plottable.cmap module
---------------------
+---------------------
 
 .. automodule:: plottable.cmap
    :members:
@@ -29,7 +29,7 @@ plottable.column_def module
    :show-inheritance:
 
 plottable.font module
---------------------
+---------------------
 
 .. automodule:: plottable.font
    :members:
@@ -37,7 +37,7 @@ plottable.font module
    :show-inheritance:
 
 plottable.formatters module
---------------------------
+---------------------------
 
 .. automodule:: plottable.formatters
    :members:
@@ -45,7 +45,7 @@ plottable.formatters module
    :show-inheritance:
 
 plottable.helpers module
------------------------
+------------------------
 
 .. automodule:: plottable.helpers
    :members:
@@ -53,7 +53,7 @@ plottable.helpers module
    :show-inheritance:
 
 plottable.plots module
----------------------
+----------------------
 
 .. automodule:: plottable.plots
    :members:
@@ -61,7 +61,7 @@ plottable.plots module
    :show-inheritance:
 
 plottable.table module
----------------------
+----------------------
 
 .. automodule:: plottable.table
    :members:

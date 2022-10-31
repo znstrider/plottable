@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to plottable's documentation!
-====================================
+=====================================
 
 Beautiful Tables in Matplotlib
 ------------------------------
