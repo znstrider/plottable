@@ -268,31 +268,10 @@ autoset_fontcolors(
 
 ##### *Contributors are very welcome to this project.*  
 
-You can contribute by giving feedback:
-
-At this stage, **usability** and **clarity** are a main priority.
-- If there is something that you think doesn't make sense, is too hard to do, worded badly or should work differently etc., don't hesitate to open an issue or get in touch.
-
-- If there is something you would like mpltable to do, but it currently lacks the functionality, open an issue.
-
-- If you'd like to review the code and have suggestions on how to structure the project better, I'm all ears!
-
-##### You are also very welcome to contribute to the package by creating a Pull Request.
-
-If you are relatively new to contributing to projects or need a refresher on the process, you can read this great [Step-by-step guide to contribute on GitHub](https://www.dataschool.io/how-to-contribute-on-github/) 
-
-If you want to contribute to the project, best use an editable installation:
-```
-git clone https://github.com/znstrider/mpltable.git
-cd mpltable
-
-pip install -e .
-```
-
-Any contribution to documentation and examples is also very welcome.
+Please take a look at the [Contributor Guide](contributing.rst)
 
 
 ### Credits
 
 mpltable is built for the lack of good table packages in the python ecosystem.
-It draws inspiration from R packages `gt <https://github.com/rstudio/gt>`_ and `reactable <https://github.com/glin/reactable>`_, from blog posts about creating tables in matplotlib `Tim Bayer: How to create custom tables <https://matplotlib.org/matplotblog/posts/how-to-create-custom-tables/>`_ and `Son of a corner: Beautiful Tables in Matplotlib, a Tutorial <https://www.sonofacorner.com/beautiful-tables/>`_ and from matplotlibs own table module.
+It draws inspiration from R packages [gt](https://github.com/rstudio/gt) and [reactable](https://github.com/glin/reactable), from blog posts about creating tables in matplotlib [Tim Bayer: How to create custom tables](https://matplotlib.org/matplotblog/posts/how-to-create-custom-tables/) and [Son of a corner: Beautiful Tables in Matplotlib, a Tutorial](https://www.sonofacorner.com/beautiful-tables/) and from matplotlibs own table module.
