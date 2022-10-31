@@ -11,8 +11,6 @@ Beautiful Tables in Matplotlib
 
 plottable is a Python library for plotting beautiful, presentation ready tables in Matplotlib.
 
-Note that this is an early version of plottable. To learn the functionality best take a look at the notebooks in the example folder.
-
 
 Quick start
 -----------
@@ -21,14 +19,9 @@ Quick start
 Installation
 ------------
 
-As it's a very early version, it's not yet available on PyPi. To install clone the repository and install it with pip locally:
-
 .. code-block::
 
-   git clone https://github.com/znstrider/plottable.git
-   cd plottable
-
-   pip install .
+   pip install plottable
 
 ---------------
 A Basic Example
@@ -57,6 +50,13 @@ Women's World Cup Example
 `You can access the WWC Example Notebook here <example_notebooks/wwc_example.html>`_
 
 .. image:: example_notebooks/images/wwc_table.png
+
+
+Credits
+=======
+
+plottable is built for the lack of good table packages in the python ecosystem.
+It draws inspiration from R packages `gt <https://github.com/rstudio/gt>`_ and `reactable <https://github.com/glin/reactable>`_, from blog posts about creating tables in matplotlib `Tim Bayer: How to create custom tables <https://matplotlib.org/matplotblog/posts/how-to-create-custom-tables/>`_ and `Son of a corner: Beautiful Tables in Matplotlib, a Tutorial <https://www.sonofacorner.com/beautiful-tables/>`_ and from matplotlibs own table module.
 
 
 .. toctree::
@@ -95,13 +95,6 @@ Women's World Cup Example
    :caption: Contents:
 
    modules
-
-Credits
-=======
-
-plottable is built for the lack of good table packages in the python ecosystem.
-It draws inspiration from R packages `gt <https://github.com/rstudio/gt>`_ and `reactable <https://github.com/glin/reactable>`_, from blog posts about creating tables in matplotlib `Tim Bayer: How to create custom tables <https://matplotlib.org/matplotblog/posts/how-to-create-custom-tables/>`_ and `Son of a corner: Beautiful Tables in Matplotlib, a Tutorial <https://www.sonofacorner.com/beautiful-tables/>`_ and from matplotlibs own table module.
-
 
 Indices and tables
 ==================
