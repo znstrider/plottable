@@ -9,10 +9,10 @@ def contrasting_font_color(rgb: Tuple[float], thresh=186) -> str:
 
     Args:
         rgb (Tuple[float]): rgb color tuple
-        thresh (int, optional): _description_. Defaults to 186.
+        thresh (int, optional): threshold to use. Defaults to 186.
 
     Returns:
-        str: _description_
+        str: color hex code
     """
     r, g, b = rgb[:3]
     if (r * 0.299 * 256 + g * 0.587 * 256 + b * 0.114 * 256) > thresh:
@@ -27,7 +27,7 @@ def contrasting_font_color_w3c(rgb: Tuple[float], adjust: float = -0.05) -> str:
 
     Args:
         rgb (Tuple[float]): rgb color tuple
-        adjust (float, optional): _description_. Defaults to -0.05.
+        adjust (float, optional): threshold to use. Defaults to -0.05.
 
     Returns:
         str: color hex code
