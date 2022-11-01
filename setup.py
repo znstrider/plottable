@@ -14,6 +14,10 @@ CLASSIFIERS = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
     "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8"
+    "Programming Language :: Python :: 3.9"
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Framework :: Matplotlib",
     "Topic :: Scientific/Engineering :: Visualization",
 ]
@@ -24,7 +28,7 @@ setuptools.setup(
     author="znstrider",
     author_email="mindfulstrider@gmail.com",
     author_twitter="@danzn1",
-    description="most pretty & lovely tables with matplotlib",
+    description="Beautifully customized tables with matplotlib",
     license="MIT",
     long_description=readme,
     long_description_content_type="text/markdown",
