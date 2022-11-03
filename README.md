@@ -1,4 +1,3 @@
-
 ## Beautiful tables in matplotlib.
 
 plottable is a Python library for plotting beautifully customized, presentation ready tables in Matplotlib.
