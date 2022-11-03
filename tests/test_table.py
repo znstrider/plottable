@@ -169,6 +169,27 @@ def test_textprops(df):
     assert tab.textprops == {"ha": "right", "fontsize": 14}
 
 
+def test_celltext_textprops(table):
+    for cell in table.cells.values():
+        assert cell.textprops == {
+            "ha": "right",
+            "va": "center",
+            "multialignment": "right",
+        }
+
+
+def test_celltext_bbox_textprop(df):
+    boxprops = {"boxstyle": "circle"}
+    tab = Table(df, textprops={"bbox": boxprops})
+    for cell in tab.cells.values():
+        assert cell.textprops == {
+            "ha": "right",
+            "va": "center",
+            "multialignment": "right",
+            "bbox": boxprops,
+        }
+
+
 def test_init_table_columns(table):
     table._init_columns()
     assert list(table.columns.keys()) == table.column_names

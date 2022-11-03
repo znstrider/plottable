@@ -383,7 +383,8 @@ class Table:
             textprops = self._get_column_textprops(col_def)
 
             # don't apply bbox around text in header
-            textprops.pop("bbox")
+            if "bbox" in textprops:
+                textprops.pop("bbox")
 
             cell = create_cell(
                 column_type=ColumnType.STRING,
@@ -424,8 +425,6 @@ class Table:
         column_textprops = col_def.get("textprops", {})
         textprops.update(column_textprops)
         textprops["multialignment"] = textprops["ha"]
-        # if "bbox" in textprops:
-        #    textprops.pop("bbox")
 
         return textprops
 
