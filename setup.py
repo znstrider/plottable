@@ -3,12 +3,23 @@ import setuptools
 with open("README.md", "r") as f:
     readme = f.read()
 
+with open("docs-requirements.txt", "r") as f:
+    docs_require = f.read().split("\n")
+
 INSTALL_REQUIRES = [
     "matplotlib",
     "numpy",
     "pandas",
     "Pillow",
 ]
+
+EXTRAS_REQUIRE = {
+    "development": [
+        "pytest",
+        "black",
+    ],
+    "docs": docs_require,
+}
 
 CLASSIFIERS = [
     "Development Status :: 3 - Alpha",
@@ -40,6 +51,7 @@ setuptools.setup(
     },
     include_package_data=True,
     install_requires=INSTALL_REQUIRES,
+    extras_require=EXTRAS_REQUIRE,
     classifiers=CLASSIFIERS,
     python_requires=">=3.7",
 )
