@@ -41,8 +41,8 @@ setuptools.setup(
     author_twitter="@danzn1",
     description="Beautifully customized tables with matplotlib",
     license="MIT",
-    long_description=readme,
     long_description_content_type="text/markdown",
+    long_description=readme,
     url="https://github.com/znstrider/plottable",
     packages=setuptools.find_packages(),
     package_data={
