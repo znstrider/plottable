@@ -38,7 +38,7 @@ exclude_patterns = [
 
 # html_favicon = "_static/"
 # html_logo = "_static/"
-html_static_path = ["_static"]
+# html_static_path = ["_static"]
 html_theme = "sphinx_book_theme"
 html_theme_options = {
     "home_page_in_toc": True,
