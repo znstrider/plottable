@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import pytest
+
 from plottable.cell import Cell, SubplotCell, TableCell, TextCell
 from plottable.plots import percentile_bars
 from plottable.table import Table
@@ -45,7 +46,7 @@ def subplot_cell() -> SubplotCell:
 
 @pytest.fixture
 def df() -> pd.DataFrame:
-    return pd.DataFrame(np.random.random((10, 5)), columns=["A", "B", "C", "D", "E"])
+    return pd.DataFrame(np.random.random((5, 5)), columns=["A", "B", "C", "D", "E"])
 
 
 @pytest.fixture
