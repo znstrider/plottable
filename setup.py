@@ -3,9 +3,6 @@ import setuptools
 with open("README.md", "r") as f:
     readme = f.read()
 
-with open("docs-requirements.txt", "r") as f:
-    docs_require = f.read().split("\n")
-
 INSTALL_REQUIRES = [
     "matplotlib",
     "numpy",
@@ -17,8 +14,7 @@ EXTRAS_REQUIRE = {
     "development": [
         "pytest",
         "black",
-    ],
-    "docs": docs_require,
+    ]
 }
 
 CLASSIFIERS = [
