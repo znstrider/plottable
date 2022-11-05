@@ -64,7 +64,7 @@ class ColumnDefinition:
             can be either "left" / "l", "right" / "r" or "both"
 
     Formatting digits reference:
-    ----------------------------
+
     source: https://www.pythoncheatsheet.org/cheatsheet/string-formatting
 
         number      format      output      description
