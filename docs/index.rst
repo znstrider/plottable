@@ -3,10 +3,6 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. |br| raw:: html
-
-   <br />
-
 Welcome to plottable's documentation!
 =====================================
 
@@ -54,6 +50,10 @@ Women's World Cup Example
 `You can access the WWC Example Notebook here <example_notebooks/wwc_example.html>`_
 
 .. image:: https://raw.githubusercontent.com/znstrider/plottable/master/docs/example_notebooks/images/wwc_table.png
+
+.. |br| raw:: html
+
+   <br />
 
 |br|
 
