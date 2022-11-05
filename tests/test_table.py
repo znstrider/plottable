@@ -1,3 +1,4 @@
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pytest
 
@@ -355,12 +356,16 @@ def test_cell_text_is_formatted_by_string_formatter(df):
         assert len(cell_text) == 4
 
 
-# TODO
 def test_table_apply_cmaps(df):
-    tab = Table(df)
-    assert True
+    tab = Table(df, column_definitions=[ColDef("B", cmap=mpl.colormaps["RdBu"])])
+    base_cell_color = tab.cells[1, 1].rectangle_patch.get_facecolor()
+
+    for cell in tab.columns["B"].cells:
+        cell_color = cell.rectangle_patch.get_facecolor()
+        assert cell_color != base_cell_color
 
 
+# TODO
 def test_table_apply_text_cmaps(df):
     tab = Table(df)
     assert True
