@@ -505,26 +505,32 @@ class Table:
     def _apply_column_cmaps(self) -> None:
         for colname, _dict in self.column_definitions.items():
             cmap_fn = _dict.get("cmap")
-            if cmap_fn is not None:
-                for cell in self.columns[colname].cells:
-                    if isinstance(cell.content, Number):
-                        if ("bbox" in _dict.get("textprops")) & hasattr(cell, "text"):
-                            cell.text.set_bbox(
-                                {
-                                    "color": cmap_fn(cell.content),
-                                    **_dict.get("textprops").get("bbox"),
-                                }
-                            )
-                        else:
-                            cell.rectangle_patch.set_facecolor(cmap_fn(cell.content))
+            if cmap_fn is None:
+                continue
+
+            for cell in self.columns[colname].cells:
+                if not isinstance(cell.content, Number):
+                    continue
+
+                if ("bbox" in _dict.get("textprops")) & hasattr(cell, "text"):
+                    cell.text.set_bbox(
+                        {
+                            "color": cmap_fn(cell.content),
+                            **_dict.get("textprops").get("bbox"),
+                        }
+                    )
+                else:
+                    cell.rectangle_patch.set_facecolor(cmap_fn(cell.content))
 
     def _apply_column_text_cmaps(self) -> None:
         for colname, _dict in self.column_definitions.items():
             cmap_fn = _dict.get("text_cmap")
-            if cmap_fn is not None:
-                for cell in self.columns[colname].cells:
-                    if isinstance(cell.content, Number) & hasattr(cell, "text"):
-                        cell.text.set_color(cmap_fn(cell.content))
+            if cmap_fn is None:
+                continue
+
+            for cell in self.columns[colname].cells:
+                if isinstance(cell.content, Number) & hasattr(cell, "text"):
+                    cell.text.set_color(cmap_fn(cell.content))
 
     def autoset_fontcolors(
         self, fn: Callable = None, colnames: List[str] = None, **kwargs
