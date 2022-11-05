@@ -1,6 +1,10 @@
 from numbers import Number
 
 
+def apply_string_formatter(fmt: str, val: str | Number) -> str:
+    return fmt.format(val)
+
+
 def decimal_to_percent(val: float) -> str:
     """Formats Numbers to a string, replacing
         0 with "–"

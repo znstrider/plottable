@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import pytest
+
 from plottable import ColDef, ColumnDefinition, Table, formatters, plots
 from plottable.cell import SubplotCell
 
@@ -33,10 +34,10 @@ def test_cell_kw(df):
         assert cell.rectangle_patch.get_linewidth() == 2
 
 
-def test_col_label_row(table):
+def test_col_label_row(table, df):
     for col_idx, cell in enumerate(table.col_label_row.cells):
         assert cell.xy == (col_idx, cell.row_idx)
-        assert cell.row_idx == 10
+        assert cell.row_idx == len(df)
         assert cell.col_idx == col_idx
 
 
@@ -336,12 +337,25 @@ def test_table_make_subplots(df):
         assert len(cell.axes_inset.get_lines()) > 0
 
 
+def test_cell_text_is_formatted_by_formatter(df):
+
+    col_defs = [ColDef("A", formatter=formatters.decimal_to_percent)]
+    tab = Table(df, column_definitions=col_defs)
+
+    for cell in tab.columns["A"].cells:
+        cell_text = cell.text.get_text()
+        assert len(cell_text) <= 4
+        assert any([s in cell_text for s in ["–", "✓", "%"]])
+
+
+def test_cell_text_is_formatted_by_string_formatter(df):
+    tab = Table(df, column_definitions=[ColDef("A", formatter="{:.2f}")])
+    for cell in tab.columns["A"].cells:
+        cell_text = cell.text.get_text()
+        assert len(cell_text) == 4
+
+
 # TODO
-def test_column_apply_formatters(df):
-    tab = Table(df)
-    assert True
-
-
 def test_table_apply_cmaps(df):
     tab = Table(df)
     assert True
@@ -400,12 +414,3 @@ def test_plot_fn_with_formatter_does_not_raise(df):
     ]
 
     tab = Table(df, column_definitions=column_definitions)
-
-
-def test_cell_text_is_formatted_by_formatter(df):
-
-    col_defs = [ColDef("A", formatter=formatters.decimal_to_percent)]
-    tab = Table(df, column_definitions=col_defs)
-
-    for cell in tab.columns["A"].cells:
-        assert len(cell.text.get_text()) <= 4

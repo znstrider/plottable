@@ -12,6 +12,7 @@ import pandas as pd
 from .cell import Column, Row, SubplotCell, TextCell, create_cell
 from .column_def import ColumnDefinition, ColumnType
 from .font import contrasting_font_color
+from .formatters import apply_string_formatter
 from .helpers import _replace_lw_key
 
 
@@ -484,10 +485,22 @@ class Table:
     def _apply_column_formatters(self) -> None:
         for colname, _dict in self.column_definitions.items():
             formatter = _dict.get("formatter")
-            if formatter is not None:
-                for cell in self.columns[colname].cells:
-                    if hasattr(cell, "text"):
-                        cell.text.set_text(formatter(cell.content))
+            if formatter is None:
+                continue
+
+            for cell in self.columns[colname].cells:
+                if not hasattr(cell, "text"):
+                    continue
+
+                if isinstance(formatter, str):
+                    formatted = apply_string_formatter(formatter, cell.content)
+                elif isinstance(formatter, Callable):
+                    formatted = formatter(cell.content)
+                else:
+                    msg = "You can provide builtin string formatters or a Callable to `formatter`."
+                    raise TypeError(msg)
+
+                cell.text.set_text(formatted)
 
     def _apply_column_cmaps(self) -> None:
         for colname, _dict in self.column_definitions.items():
