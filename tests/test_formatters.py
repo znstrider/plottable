@@ -1,4 +1,5 @@
 import pytest
+
 from plottable.formatters import decimal_to_percent, signed_integer, tickcross
 
 
