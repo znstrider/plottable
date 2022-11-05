@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 - Allow for string representations of builtin string formatters to ColumnDefinitions formatters.
 
 
-0.1.3
+0.1.2
 =====
 
 Fixed
