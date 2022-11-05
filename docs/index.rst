@@ -3,6 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. |br| raw:: html
+
+   <br />
+
 Welcome to plottable's documentation!
 =====================================
 
@@ -41,7 +45,7 @@ A Basic Example
 
    plt.show()
 
-.. image:: example_notebooks/images/basic_table.png
+.. image:: https://raw.githubusercontent.com/znstrider/plottable/master/docs/example_notebooks/images/basic_table.png
 
 -------------------------
 Women's World Cup Example
@@ -49,7 +53,25 @@ Women's World Cup Example
 
 `You can access the WWC Example Notebook here <example_notebooks/wwc_example.html>`_
 
-.. image:: example_notebooks/images/wwc_table.png
+.. image:: https://raw.githubusercontent.com/znstrider/plottable/master/docs/example_notebooks/images/wwc_table.png
+
+|br|
+
+Customizing a Table
+===================
+
+1) `By supplying keywords to the Table <https://plottable.readthedocs.io/en/latest/notebooks/table.html>`_
+
+2) `Providing a ColumnDefinition for each column you want to style <https://plottable.readthedocs.io/en/latest/notebooks/column_definition.html>`_
+
+3) `Accessing a tables rows or columns <https://plottable.readthedocs.io/en/latest/notebooks/rows_and_columns.html>`_
+
+Contributing
+============
+
+*Contributors are very welcome to this project.*  
+
+Please take a look at the `Contributor Guide <contributing.rst>`_
 
 
 Credits
