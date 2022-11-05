@@ -1,4 +1,5 @@
 import matplotlib
+
 from plottable import __version__
 from plottable.cell import Column, SubplotCell, TextCell, create_cell
 from plottable.column_def import ColumnType
@@ -6,7 +7,7 @@ from plottable.plots import percentile_bars
 
 
 def test_version():
-    assert __version__ == "0.1.2"
+    assert __version__ == "0.1.3"
 
 
 class TestDefaultCell:
