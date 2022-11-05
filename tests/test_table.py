@@ -365,12 +365,16 @@ def test_table_apply_cmaps(df):
         assert cell_color != base_cell_color
 
 
-# TODO
 def test_table_apply_text_cmaps(df):
-    tab = Table(df)
-    assert True
+    tab = Table(df, column_definitions=[ColDef("B", text_cmap=mpl.colormaps["RdBu"])])
+    base_text_color = tab.cells[1, 1].text.get_color()
+
+    for cell in tab.columns["B"].cells:
+        cell_color = cell.text.get_color()
+        assert cell_color != base_text_color
 
 
+# TODO
 def test_table_plot_colgroup_headers(df):
     tab = Table(df)
     assert True
