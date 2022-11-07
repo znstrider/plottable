@@ -321,10 +321,26 @@ class Table:
 
         self.col_label_row = self._get_col_label_row(idx + 1, self._get_column_titles())
 
-    def get_column(self, name: str = None) -> Column:
+    def get_column(self, name: str) -> Column:
+        """Gets a Column by its column_name.
+
+        Args:
+            name (str): the column_name in the df.
+
+        Returns:
+            Column: A Column of the Table
+        """
         return self.columns[name]
 
     def get_column_by_index(self, index: int) -> Column:
+        """Gets a Column by its numeric index.
+
+        Args:
+            index (int): numeric index
+
+        Returns:
+            Column: A Column of the Table
+        """
         return list(self.columns.values())[index]
 
     def get_even_rows(self) -> List[Row]:
