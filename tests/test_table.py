@@ -391,6 +391,21 @@ def test_table_apply_text_cmaps(df):
         assert cell_color != base_text_color
 
 
+def test_col_label_row_height_is_set(df):
+    tab = Table(df, col_label_cell_kw={"height": 2})
+
+    for cell in tab.col_label_row.cells:
+        assert cell.height == 2
+        assert cell.rectangle_patch.get_height() == 2
+
+
+def test_set_col_label_row_influences_col_group_label_y(df):
+    tab = Table(df, col_label_cell_kw={"height": 2})
+
+    for cell in tab.col_group_cells.values():
+        assert cell.y == -2
+
+
 # TODO
 def test_table_plot_colgroup_headers(df):
     tab = Table(df)

@@ -1,7 +1,7 @@
 import matplotlib
 
 from plottable import __version__
-from plottable.cell import Column, SubplotCell, TextCell, create_cell
+from plottable.cell import Column, Row, SubplotCell, TextCell, create_cell
 from plottable.column_def import ColumnType
 from plottable.plots import percentile_bars
 
@@ -187,3 +187,95 @@ def test_row_of_subplot_cells_does_not_raise_on_set_fontproperties():
     row.set_fontsize(10)
     row.set_ha("right")
     row.set_ma("right")
+
+
+def test_row_height():
+    cells = [
+        create_cell(
+            column_type=ColumnType.STRING,
+            xy=(i, 0),
+            content=i,
+            row_idx=0,
+            col_idx=i,
+            height=2,
+        )
+        for i in range(5)
+    ]
+    row = Row(cells, index=0)
+    assert row.height == 2
+
+
+def test_row_x():
+    cells = [
+        create_cell(
+            column_type=ColumnType.STRING,
+            xy=(i + 2, 0),
+            content=i,
+            row_idx=0,
+            col_idx=i,
+        )
+        for i in range(5)
+    ]
+    row = Row(cells, index=0)
+    assert row.x == 2
+
+
+def test_row_y():
+    cells = [
+        create_cell(
+            column_type=ColumnType.STRING,
+            xy=(i, 2),
+            content=i,
+            row_idx=0,
+            col_idx=i,
+        )
+        for i in range(5)
+    ]
+    row = Row(cells, index=0)
+    assert row.y == 2
+
+
+def test_column_width():
+    cells = [
+        create_cell(
+            column_type=ColumnType.STRING,
+            xy=(0, i),
+            content=i,
+            row_idx=i,
+            col_idx=0,
+            width=2,
+        )
+        for i in range(5)
+    ]
+    col = Column(cells, index=0)
+    assert col.width == 2
+
+
+def test_column_x():
+    cells = [
+        create_cell(
+            column_type=ColumnType.STRING,
+            xy=(2, i),
+            content=i,
+            row_idx=i,
+            col_idx=0,
+        )
+        for i in range(5)
+    ]
+    col = Column(cells, index=0)
+    assert col.x == 2
+
+
+def test_column_y():
+    cells = [
+        create_cell(
+            column_type=ColumnType.STRING,
+            xy=(0, i + 2),
+            content=i,
+            row_idx=i,
+            col_idx=0,
+        )
+        for i in range(5)
+    ]
+    col = Column(cells, index=0)
+    assert col.y == 2
