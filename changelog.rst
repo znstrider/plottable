@@ -3,6 +3,13 @@ Changelog
 
 All notable changes to this project will be documented in this file.
 
+
+Unreleased
+==========
+
+- add light_color and dark_color arguments to plottable.font autoset fontcolor functions
+
+
 0.1.3
 =====
 
