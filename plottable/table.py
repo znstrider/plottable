@@ -230,7 +230,8 @@ class Table:
             x_min = min(col.get_xrange()[0] for col in columns)
             x_max = max(col.get_xrange()[1] for col in columns)
             dx = x_max - x_min
-            y = -1
+
+            y = 0 - self.col_label_row.height
 
             textprops = self.textprops.copy()
             textprops.update({"ha": "center", "va": "bottom"})
@@ -397,6 +398,11 @@ class Table:
         """
         widths = self._get_column_widths()
 
+        if "height" in self.col_label_cell_kw:
+            height = self.col_label_cell_kw["height"]
+        else:
+            height = 1
+
         x = 0
 
         row = Row(cells=[], index=idx)
@@ -413,11 +419,15 @@ class Table:
 
             cell = create_cell(
                 column_type=ColumnType.STRING,
-                xy=(x, idx),
+                xy=(
+                    x,
+                    idx + 1 - height,
+                ),  # if height is different from 1 we need to adjust y
                 content=_content,
                 row_idx=idx,
                 col_idx=col_idx,
                 width=width,
+                height=height,
                 rect_kw=self.col_label_cell_kw,
                 textprops=textprops,
                 ax=self.ax,
