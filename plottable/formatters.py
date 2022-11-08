@@ -1,8 +1,35 @@
 from numbers import Number
+from typing import Callable
 
 
 def apply_string_formatter(fmt: str, val: str | Number) -> str:
     return fmt.format(val)
+
+
+def apply_formatter(formatter: str | Callable, content: str | Number) -> str:
+    """Applies a formatter to the content.
+
+    Args:
+        formatter (str | Callable):
+            the string formatter.
+            Can either be a string format, ie "{:2f}" for 2 decimal places.
+            Or a Callable that is applied to the content.
+        content (str | Number):
+            The content to format
+
+    Raises:
+        TypeError: when formatter is not of type str or Callable.
+
+    Returns:
+        str: a formatted string
+    """
+
+    if isinstance(formatter, str):
+        return apply_string_formatter(formatter, content)
+    elif isinstance(formatter, Callable):
+        return formatter(content)
+    else:
+        raise TypeError("formatter needs to be either a `Callable` or a string.")
 
 
 def decimal_to_percent(val: float) -> str:

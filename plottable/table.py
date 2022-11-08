@@ -12,7 +12,7 @@ import pandas as pd
 from .cell import Column, Row, SubplotCell, TextCell, create_cell
 from .column_def import ColumnDefinition, ColumnType
 from .font import contrasting_font_color
-from .formatters import apply_string_formatter
+from .formatters import apply_formatter
 from .helpers import _replace_lw_key
 
 
@@ -53,9 +53,9 @@ class Table:
         column_border_kw (Dict[str, Any], optional):
             column_border_kw are passed to plt.plot. Defaults to {}.
         even_row_color (str | Tuple, optional):
-            facecolor of the even row cell's patches
+            facecolor of the even row cell's patches. Top Row has an even (0) index.
         odd_row_color (str | Tuple, optional):
-            facecolor of the even row cell's patches
+            facecolor of the even row cell's patches. Top Row has an even (0) index.
 
     Examples
     --------
@@ -139,12 +139,7 @@ class Table:
 
         self._plot_col_group_labels()
 
-        ymax = self.n_rows + 1
-        if len(self.col_group_cells) > 0:
-            ymax += 1
-
-        self.ax.set_xlim(0, sum(self._get_column_widths()) + 0.025)
-        self.ax.set_ylim(-0.025, ymax + 0.05)
+        ymax = self.n_rows
 
         if col_label_divider:
             self._plot_col_label_divider(**col_label_divider_kw)
@@ -153,6 +148,15 @@ class Table:
         if row_dividers:
             self._plot_row_dividers(**row_divider_kw)
         self._plot_column_borders(**column_border_kw)
+
+        self.ax.set_xlim(-0.025, sum(self._get_column_widths()) + 0.025)
+        if self.col_group_cells:
+            miny = -2
+        else:
+            miny = -1
+
+        self.ax.set_ylim(miny - 0.025, ymax + 0.05)
+        self.ax.invert_yaxis()
 
         self._make_subplots()
 
@@ -226,7 +230,7 @@ class Table:
             x_min = min(col.get_xrange()[0] for col in columns)
             x_max = max(col.get_xrange()[1] for col in columns)
             dx = x_max - x_min
-            y = columns[0].get_yrange()[1] + 1
+            y = -1
 
             textprops = self.textprops.copy()
             textprops.update({"ha": "center", "va": "bottom"})
@@ -243,7 +247,10 @@ class Table:
             )
             self.col_group_cells[group].draw()
             self.ax.plot(
-                [x_min + 0.05 * dx, x_max - 0.05 * dx], [y, y], lw=0.2, color="k"
+                [x_min + 0.05 * dx, x_max - 0.05 * dx],
+                [y, y],
+                lw=0.2,
+                color=plt.rcParams["text.color"],
             )
 
     def _plot_col_label_divider(self, **kwargs):
@@ -257,7 +264,7 @@ class Table:
         x0, x1 = self.rows[0].get_xrange()
         self.ax.plot(
             [x0, x1],
-            [self.n_rows, self.n_rows],
+            [0, 0],
             **COL_LABEL_DIVIDER_KW,
         )
 
@@ -270,7 +277,8 @@ class Table:
         self.FOOTER_DIVIDER_KW = FOOTER_DIVIDER_KW
 
         x0, x1 = list(self.rows.values())[-1].get_xrange()
-        self.ax.plot([x0, x1], [0, 0], **FOOTER_DIVIDER_KW)
+        y = len(self.df)
+        self.ax.plot([x0, x1], [y, y], **FOOTER_DIVIDER_KW)
 
     def _plot_row_dividers(self, **kwargs):
         """Plots lines between all TableRows."""
@@ -316,10 +324,10 @@ class Table:
     def _init_rows(self):
         """Initializes the Tables Rows."""
         self.rows = {}
-        for idx, values in enumerate(self.df.iloc[-1::-1].to_records()):
+        for idx, values in enumerate(self.df.to_records()):
             self.rows[idx] = self._get_row(idx, values)
 
-        self.col_label_row = self._get_col_label_row(idx + 1, self._get_column_titles())
+        self.col_label_row = self._get_col_label_row(-1, self._get_column_titles())
 
     def get_column(self, name: str) -> Column:
         """Gets a Column by its column_name.
@@ -344,10 +352,10 @@ class Table:
         return list(self.columns.values())[index]
 
     def get_even_rows(self) -> List[Row]:
-        return list(self.rows.values())[-1::-2]
+        return list(self.rows.values())[::2]
 
     def get_odd_rows(self) -> List[Row]:
-        return list(self.rows.values())[-2::-2]
+        return list(self.rows.values())[1::2]
 
     def set_alternating_row_colors(
         self, color: str | Tuple[float] = None, color2: str | Tuple[float] = None
@@ -508,14 +516,7 @@ class Table:
                 if not hasattr(cell, "text"):
                     continue
 
-                if isinstance(formatter, str):
-                    formatted = apply_string_formatter(formatter, cell.content)
-                elif isinstance(formatter, Callable):
-                    formatted = formatter(cell.content)
-                else:
-                    msg = "You can provide builtin string formatters or a Callable to `formatter`."
-                    raise TypeError(msg)
-
+                formatted = apply_formatter(formatter, cell.content)
                 cell.text.set_text(formatted)
 
     def _apply_column_cmaps(self) -> None:

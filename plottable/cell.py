@@ -270,10 +270,12 @@ class TextCell(TableCell):
 
         if self.va == "center":
             y += self.height / 2
+        # because the yaxis is inverted we subtract a ratio of the padding
+        # if va is "bottom" and add it if it's "top"
         elif self.va == "bottom":
-            y = y + self.padding * self.height
+            y = y - self.padding * self.height
         elif self.va == "top":
-            y = y + (1 - self.padding) * self.height
+            y = y - (1 - self.padding) * self.height
 
         self.text = self.ax.text(x, y, str(self.content), **self.textprops)
 

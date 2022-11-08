@@ -1,6 +1,12 @@
 import pytest
 
-from plottable.formatters import decimal_to_percent, signed_integer, tickcross
+from plottable.formatters import (
+    apply_formatter,
+    apply_string_formatter,
+    decimal_to_percent,
+    signed_integer,
+    tickcross,
+)
 
 
 class TestDecimalToPercent:
@@ -34,3 +40,25 @@ def test_signed_integer():
     assert signed_integer(0) == "0"
     assert signed_integer(1) == "+1"
     assert signed_integer(-1) == "-1"
+
+
+@pytest.mark.parametrize(
+    "content, fmt, output",
+    [(1.23456, "{:.2f}", "1.23"), (0.5, "{:.0%}", "50%"), ("100", "${:}", "$100")],
+)
+def test_apply_string_formatter(content, fmt, output):
+    assert apply_string_formatter(fmt, content) == output
+
+
+@pytest.mark.parametrize(
+    "content, fmt, output",
+    [
+        (1.23456, "{:.2f}", "1.23"),
+        (0.5, "{:.0%}", "50%"),
+        ("100", "${:}", "$100"),
+        (0, decimal_to_percent, "–"),
+        (1.0, decimal_to_percent, "✓"),
+    ],
+)
+def test_apply_formatter(content, fmt, output):
+    assert apply_formatter(fmt, content) == output

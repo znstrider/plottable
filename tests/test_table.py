@@ -37,8 +37,7 @@ def test_cell_kw(df):
 
 def test_col_label_row(table, df):
     for col_idx, cell in enumerate(table.col_label_row.cells):
-        assert cell.xy == (col_idx, cell.row_idx)
-        assert cell.row_idx == len(df)
+        assert cell.y == cell.row_idx
         assert cell.col_idx == col_idx
 
 
@@ -214,6 +213,24 @@ def test_init_table_rows(table):
     assert list(table.rows.keys()) == list(range(len(table.df)))
 
 
+def test_table_row_indices(df):
+    tab = Table(df)
+
+    first_row = tab.rows[0]
+    df_row_values = df.to_records()[0]
+
+    for cell, value in zip(first_row.cells, df_row_values):
+        assert cell.content == value
+
+
+def test_col_label_row_index(table):
+    assert table.col_label_row.index == -1
+
+
+def test_group_label_row_index(table):
+    assert table.col_label_row.index == -1
+
+
 def test_get_column(table):
     col = table.get_column("A")
     assert col.index == 1
@@ -235,11 +252,11 @@ def test_get_row(table):
 
 
 def test_xlim(table):
-    assert table.ax.get_xlim() == (0, table.df.shape[1] + 1 + 0.025)
+    assert table.ax.get_xlim() == (-0.025, table.df.shape[1] + 1 + 0.025)
 
 
 def test_ylim(table):
-    assert table.ax.get_ylim() == (-0.025, len(table.df) + 1 + 0.05)
+    assert table.ax.get_ylim() == (len(table.df) + 0.05, -1.025)
 
 
 def test_get_column_widths(table):
@@ -257,11 +274,11 @@ def test_get_custom_index_column_widths(df):
 
 
 def test_get_even_rows(table):
-    assert table.get_even_rows() == list(table.rows.values())[-1::-2]
+    assert table.get_even_rows() == list(table.rows.values())[::2]
 
 
 def test_get_odd_rows(table):
-    assert table.get_odd_rows() == list(table.rows.values())[-2::-2]
+    assert table.get_odd_rows() == list(table.rows.values())[1::2]
 
 
 def test_set_alternating_row_colors_even_rows(table):
