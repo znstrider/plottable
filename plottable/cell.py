@@ -465,6 +465,18 @@ class Row(Sequence):
         cell = self.cells[0]
         return cell.xy[1], cell.xy[1] + cell.height
 
+    @property
+    def x(self) -> float:
+        return self.cells[0].xy[0]
+
+    @property
+    def y(self) -> float:
+        return self.cells[0].xy[1]
+
+    @property
+    def height(self) -> float:
+        return self.cells[0].height
+
     def __repr__(self) -> str:
         return f"Row(cells={self.cells}, index={self.index})"
 
@@ -494,6 +506,18 @@ class Column(Sequence):
         return min([cell.xy[1] for cell in self.cells]), max(
             [cell.xy[1] + cell.height for cell in self.cells]
         )
+
+    @property
+    def x(self) -> float:
+        return self.cells[0].xy[0]
+
+    @property
+    def y(self) -> float:
+        return self.cells[0].xy[1]
+
+    @property
+    def width(self) -> float:
+        return self.cells[0].width
 
     def __repr__(self) -> str:
         return f"Column(cells={self.cells}, index={self.index})"
