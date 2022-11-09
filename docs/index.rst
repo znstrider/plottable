@@ -100,6 +100,7 @@ It draws inspiration from R packages `gt <https://github.com/rstudio/gt>`_ and `
 
    example_notebooks/basic_example.ipynb
    example_notebooks/wwc_example.ipynb
+   example_notebooks/bohndesliga_table.ipynb
    example_notebooks/plot_example.ipynb
    example_notebooks/heatmap.ipynb
 
