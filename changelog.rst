@@ -13,6 +13,7 @@ Alongside that change col_label_row and col_group_labels now have negative indic
 - add an apply_formatter function to formatters. This can now be used to also apply builtin string formatter syntax within plots (TODO).
 - allow for custom height of col_label_row
 - require python>=3.10
+- add Bohndesliga table example
 
 0.1.3
 =====
