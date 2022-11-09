@@ -20,9 +20,6 @@ EXTRAS_REQUIRE = {
 CLASSIFIERS = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Framework :: Matplotlib",
@@ -49,5 +46,5 @@ setuptools.setup(
     install_requires=INSTALL_REQUIRES,
     extras_require=EXTRAS_REQUIRE,
     classifiers=CLASSIFIERS,
-    python_requires=">=3.7",
+    python_requires=">=3.10",
 )
