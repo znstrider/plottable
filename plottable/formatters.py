@@ -1,12 +1,14 @@
 from numbers import Number
 from typing import Callable
 
+from ._types import Content, Fmt
 
-def apply_string_formatter(fmt: str, val: str | Number) -> str:
+
+def apply_string_formatter(fmt: str, val: Content) -> str:
     return fmt.format(val)
 
 
-def apply_formatter(formatter: str | Callable, content: str | Number) -> str:
+def apply_formatter(formatter: Fmt, content: Content) -> str:
     """Applies a formatter to the content.
 
     Args:
@@ -57,11 +59,11 @@ def decimal_to_percent(val: float) -> str:
         return f"{str(round(val * 100))}%"
 
 
-def tickcross(val: Number | bool) -> str:
-    """formats a bool or (0, 1) value to a tick "✔" or cross "✖".
+def tickcross(val: Number) -> str:
+    """formats a (0, 1) value to a tick "✔" or cross "✖".
 
     Args:
-        val (Number | bool): bool or (0, 1) value to format
+        val (Number): (0, 1) value to format
 
     Returns:
         str: formatted value as string

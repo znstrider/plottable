@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from numbers import Number
 from typing import Any, Callable, Dict, List, Tuple
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
+from ._types import Content
 from .column_def import ColumnType
 
 
@@ -199,7 +199,7 @@ class TextCell(TableCell):
     def __init__(
         self,
         xy: Tuple[float, float],
-        content: str | Number,
+        content: Content,
         row_idx: int,
         col_idx: int,
         width: float = 1,

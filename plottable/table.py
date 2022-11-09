@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 from numbers import Number
-from typing import Any, Callable, Dict, List, Tuple
+from typing import Any, Callable, Dict, List, Tuple, Union
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from .cell import Column, Row, SubplotCell, TextCell, create_cell
+from .cell import Column, Content, Row, SubplotCell, TextCell, create_cell
 from .column_def import ColumnDefinition, ColumnType
 from .font import contrasting_font_color
 from .formatters import apply_formatter
@@ -91,8 +91,8 @@ class Table:
         col_label_divider_kw: Dict[str, Any] = {},
         footer_divider_kw: Dict[str, Any] = {},
         column_border_kw: Dict[str, Any] = {},
-        even_row_color: str | Tuple = None,
-        odd_row_color: str | Tuple = None,
+        even_row_color: Union[str, Tuple] = None,
+        odd_row_color: Union[str, Tuple] = None,
     ):
 
         if index_col is not None:
@@ -359,7 +359,9 @@ class Table:
         return list(self.rows.values())[1::2]
 
     def set_alternating_row_colors(
-        self, color: str | Tuple[float] = None, color2: str | Tuple[float] = None
+        self,
+        color: Union[str, Tuple[float]] = None,
+        color2: Union[str, Tuple[float]] = None,
     ) -> Table:
         """Sets the color of even row's rectangle patches to `color`.
 
@@ -386,7 +388,7 @@ class Table:
             self.column_definitions[col].get("width", 1) for col in self.column_names
         ]
 
-    def _get_col_label_row(self, idx: int, content: List[str | Number]) -> Row:
+    def _get_col_label_row(self, idx: int, content: List[Content]) -> Row:
         """Creates the Column Label Row.
 
         Args:
@@ -463,7 +465,7 @@ class Table:
 
         return textprops
 
-    def _get_row(self, idx: int, content: List[str | Number]) -> Row:
+    def _get_row(self, idx: int, content: List[Content]) -> Row:
         widths = self._get_column_widths()
 
         x = 0

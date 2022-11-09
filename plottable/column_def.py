@@ -2,9 +2,10 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 from enum import Enum
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable, Dict
 
-from matplotlib.colors import LinearSegmentedColormap
+from ._types import Cmap
+from .formatters import Fmt
 
 
 class ColumnType(Enum):
@@ -59,7 +60,7 @@ class ColumnDefinition:
             To pass additional arguments to it, use plot_kw (see below).
         plot_kw: Dict[str, Any] = field(default_factory=dict)
             Additional keywords provided to plot_fn.
-        border: str | List = None:
+        border: str = None:
             Plots a vertical borderline.
             can be either "left" / "l", "right" / "r" or "both"
 
@@ -89,13 +90,13 @@ class ColumnDefinition:
     title: str = None
     width: float = 1
     textprops: Dict[str, Any] = field(default_factory=dict)
-    formatter: Callable | str = None
-    cmap: Callable | LinearSegmentedColormap = None
-    text_cmap: Callable | LinearSegmentedColormap = None
+    formatter: Fmt = None
+    cmap: Cmap = None
+    text_cmap: Cmap = None
     group: str = None
     plot_fn: Callable = None
     plot_kw: Dict[str, Any] = field(default_factory=dict)
-    border: str | List = None
+    border: str = None
 
     def _asdict(self) -> Dict[str, Any]:
         """Returns the attributes as a dictionary.

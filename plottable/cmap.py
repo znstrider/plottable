@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Optional
 
 import matplotlib
 import pandas as pd
@@ -39,7 +39,7 @@ def centered_cmap(
     s: pd.Series,
     cmap: matplotlib.colors.LinearSegmentedColormap,
     num_stds: float = 2.5,
-    center: float | None = 0,
+    center: Optional[float] = 0,
 ) -> Callable:
     """Returns a centered and normalized colormap function that takes a float as an argument and
     returns an rgba value.
