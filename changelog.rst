@@ -4,8 +4,8 @@ Changelog
 All notable changes to this project will be documented in this file.
 
 
-Unreleased
-==========
+0.1.4
+=====
 
 - add light_color and dark_color arguments to plottable.font autoset fontcolor functions
 - inverse the yaxis of the table axes. This aligns the indices of table.rows with the integer location (iloc) of the row in the DataFrame.
