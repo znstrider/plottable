@@ -7,6 +7,8 @@ import numpy as np
 from matplotlib.patches import BoxStyle, Circle, FancyBboxPatch, Rectangle, Wedge
 from PIL import Image
 
+from .formatters import apply_formatter
+
 
 def image(ax: matplotlib.axes.Axes, path: str) -> matplotlib.image.AxesImage:
     """Plots an image on the axes.
@@ -109,7 +111,9 @@ def bar(
         textprops (Dict[str, Any], optional):
             textprops passed to ax.text. Defaults to {}.
         formatter (Callable, optional):
-            a function that formats the annotation string. Defaults to None.
+            a string formatter.
+            Can either be a string format, ie "{:2f}" for 2 decimal places.
+            Or a Callable that is applied to the value. Defaults to None.
 
     Returns:
         matplotlib.container.BarContainer
@@ -145,9 +149,11 @@ def bar(
             x = val - 0.025 * abs(xlim[1] - xlim[0])
 
         if formatter is not None:
-            val = formatter(val)
+            text = apply_formatter(formatter, val)
+        else:
+            text = val
 
-        ax.text(x, 0.5, val, ha=ha, va="center", **textprops, zorder=0.3)
+        ax.text(x, 0.5, text, ha=ha, va="center", **textprops, zorder=0.3)
 
     ax.axis("off")
     ax.set_xlim(
@@ -340,7 +346,9 @@ def progress_donut(
         textprops (Dict[str, Any], optional):
             textprops passed to ax.text. Defaults to {}.
         formatter (Callable, optional):
-            a function that formats the annotation string. Defaults to None.
+            a string formatter.
+            Can either be a string format, ie "{:2f}" for 2 decimal places.
+            Or a Callable that is applied to the value. Defaults to None.
 
     Returns:
         List[matplotlib.patches.Wedge]
@@ -376,9 +384,11 @@ def progress_donut(
     ax.set_aspect("equal")
 
     if formatter is not None:
-        val = formatter(val)
+        text = apply_formatter(formatter, val)
+    else:
+        text = val
 
-    ax.text(0.5, 0.5, val, ha="center", va="center", **textprops)
+    ax.text(0.5, 0.5, text, ha="center", va="center", **textprops)
     ax.axis("off")
 
     return wedges
