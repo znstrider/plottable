@@ -3,6 +3,10 @@ Changelog
 
 All notable changes to this project will be documented in this file.
 
+0.1.5
+=====
+- allow python>=3.7
+
 
 0.1.4
 =====

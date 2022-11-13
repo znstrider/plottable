@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.abspath("../plottable"))
 project = "plottable"
 copyright = "2022, znstrider"
 author = "znstrider"
-release = "0.1.4"
+release = "0.1.5"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
