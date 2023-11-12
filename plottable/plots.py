@@ -1,5 +1,5 @@
 from statistics import mean
-from typing import Any, Callable, Dict, List, Tuple
+from typing import Any, Callable, Dict, List, Tuple, Union
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -223,7 +223,6 @@ def percentile_bars(
     rects = []
 
     for x in np.linspace(0, 0.9, 10):
-
         bg_rect = FancyBboxPatch(
             xy=(x, 0),
             width=0.1,
@@ -392,3 +391,28 @@ def progress_donut(
     ax.axis("off")
 
     return wedges
+
+
+def line_chart(
+    ax: plt.Axes, values: List[float], line_kwargs: Union[List[dict], dict] = {}
+) -> List[matplotlib.lines.Line2D]:
+    """Plots a line chart in a cell.
+
+    Args:
+        ax (matplotlib.axes.Axes):
+            Axes.
+        values (List[float]):
+            List of values to plot.
+        **kwargs:
+            Additional keyword arguments passed to `ax.plot()`.
+
+    Returns:
+        plt.Artist:
+            The line artist.
+    """
+    x_values = range(1, len(values) + 1)
+
+    lines = ax.plot(x_values, values, **line_kwargs)
+    ax.axis("off")
+
+    return lines
