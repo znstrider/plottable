@@ -397,10 +397,10 @@ def progress_donut(
     return wedges
 
 
-def line_chart(
+def sparklines(
     ax: plt.Axes, values: ArrayLike | None, line_kwargs: List[dict] | dict | None = None
 ) -> List[Line2D]:
-    """Plots a line chart in a cell.
+    """Plots sparklines/line chart in cells
 
     Args:
         ax (matplotlib.axes.Axes):
