@@ -405,15 +405,15 @@ def sparklines(
     Args:
         ax (matplotlib.axes.Axes):
             Axes.
-        values (List[float]):
+        values (np.ArrayLike | None):
             List of values to plot.
-        line_kwargs:
+        line_kwargs (List[dict] | dict | None):
             Additional keyword arguments passed to `ax.plot()`.
             If multiple values are passed for multiple lines, this can also be a list for each
 
     Returns:
-        plt.Artist:
-            The line artist.
+        lines (List[plt.Artist]):
+            List of the line artist(s).
     """
 
     # number of points to plot in any single line
