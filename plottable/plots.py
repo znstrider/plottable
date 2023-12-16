@@ -1,9 +1,12 @@
 from statistics import mean
 from typing import Any, Callable, Dict, List, Tuple
+from itertools import cycle
 
 import matplotlib
+from matplotlib.lines import Line2D
 import matplotlib.pyplot as plt
 import numpy as np
+from numpy.typing import ArrayLike
 from matplotlib.patches import BoxStyle, Circle, FancyBboxPatch, Rectangle, Wedge
 from PIL import Image
 
@@ -223,7 +226,6 @@ def percentile_bars(
     rects = []
 
     for x in np.linspace(0, 0.9, 10):
-
         bg_rect = FancyBboxPatch(
             xy=(x, 0),
             width=0.1,
@@ -392,3 +394,62 @@ def progress_donut(
     ax.axis("off")
 
     return wedges
+
+
+def sparklines(
+    ax: plt.Axes, values: ArrayLike | None, line_kwargs: List[dict] | dict | None = None
+) -> List[Line2D]:
+    """Plots sparklines/line chart in cells
+
+    Args:
+        ax (matplotlib.axes.Axes):
+            Axes.
+        values (np.ArrayLike | None):
+            List of values to plot.
+        line_kwargs (List[dict] | dict | None):
+            Additional keyword arguments passed to `ax.plot()`.
+            If multiple values are passed for multiple lines, this can also be a list for each.
+            If number of kwargs passed are less than number of lines, the kwargs are cycled through for the remaining lines
+
+    Returns:
+        lines (List[Line2D]):
+            List of the line artist(s).
+    """
+
+    # number of points to plot in any single line
+    num_points = len(values)
+
+    if num_points != 0:
+        if line_kwargs is None:
+            line_kwargs = {}
+
+        # create a cyclable iterator for the line_kwargs
+        if isinstance(line_kwargs, list):
+            line_kwargs = cycle(line_kwargs)
+
+        elif isinstance(line_kwargs, dict):
+            line_kwargs = cycle([line_kwargs])
+
+        # data passed for a single line
+        if isinstance(values[0], int | float):
+            xs = range(num_points)
+            lines = ax.plot(xs, values, **next(line_kwargs))
+            return lines
+
+        # data passed for multiple lines
+        else:
+            # assert that all lines have the same number of points
+            assert all(
+                len(value) == len(values[0]) for value in values
+            ), "Data passed for lines doesn't have equal number of points"
+
+            lines = []
+            xs = range(len(values[0]))
+            for value, line_kwargs_dict in zip(values, line_kwargs):
+                line, = ax.plot(xs, value, **line_kwargs_dict)
+                lines.append(line)
+
+            return lines
+    else:
+        lines = ax.plot([], [], **next(line_kwargs))
+        return lines
