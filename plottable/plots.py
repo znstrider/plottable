@@ -1,7 +1,6 @@
 from statistics import mean
-from typing import Any, Callable, Dict, List, Tuple, Union
+from typing import Any, Callable, Dict, List, Tuple
 from itertools import cycle
-from numbers import Number
 
 import matplotlib
 from matplotlib.lines import Line2D
