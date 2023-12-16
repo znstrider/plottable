@@ -443,13 +443,13 @@ def sparklines(
             assert all(
                 len(value) == len(values[0]) for value in values
             ), "Data passed for lines doesn't have equal number of points"
-            
+
             lines = []
             xs = range(len(values[0]))
             for value, line_kwargs_dict in zip(values, line_kwargs):
                 line, = ax.plot(xs, value, **line_kwargs_dict)
                 lines.append(line)
-            
+
             return lines
     else:
         lines = ax.plot([], [], **next(line_kwargs))

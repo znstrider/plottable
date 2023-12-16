@@ -3,21 +3,21 @@ from plottable.plots import sparklines
 from matplotlib.lines import Line2D
 import matplotlib.pyplot as plt
 
+
+# define fixture for a single line sparkline
 @pytest.fixture
 def sparkline_single():
-    return sparklines(plt.gca(), 
-                     [10,12,14,16,18]
-                     )
+    return sparklines(plt.gca(), [10, 12, 14, 16, 18])
 
 
+# fixture for multiple lines sparkline
 @pytest.fixture
 def sparkline_multiple():
-    return sparklines(plt.gca(), 
-                     [[10,12,14,16,18], 
-                      [20,40,60,80,100]],
-                      line_kwargs=[{"color": 'red', 'lw': 1}, 
-                                   {"color": 'dodgerblue'}]
-                     )
+    return sparklines(
+        plt.gca(),
+        [[10, 12, 14, 16, 18], [20, 40, 60, 80, 100]],
+        line_kwargs=[{"color": "red", "lw": 1}, {"color": "dodgerblue"}],
+    )
 
 
 class TestSingleSparkline:
@@ -36,4 +36,4 @@ class TestMultipleSparklines:
         assert len(sparkline_multiple) == 2
 
     def test_sparklines_multiple_kwargs(self, sparkline_multiple):
-        assert sparkline_multiple[1].get_color() == 'dodgerblue'
+        assert sparkline_multiple[1].get_color() == "dodgerblue"
