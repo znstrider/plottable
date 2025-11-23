@@ -71,7 +71,7 @@ Contributing
 
 *Contributors are very welcome to this project.*  
 
-Please take a look at the `Contributor Guide <contributing.rst>`_
+Please take a look at the `Contributor Guide <https://plottable.readthedocs.io/en/latest/dev/contributing.html>`_
 
 
 Credits
